@@ -1,3 +1,4 @@
+/* Updated: 2025-12-28T09:29:35.383Z */
 /* Updated: 2025-12-28T03:19:20.876Z */
 /* Updated: 2025-12-27T19:57:35.474Z */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -91,35 +92,65 @@
 
 @layer base {
   :root {
-    --background: #020205;
-    --foreground: #ffffff;
-    --card: #08080f;
-    --card-foreground: #ffffff;
-    --popover: #08080f;
-    --popover-foreground: #ffffff;
-    --primary: #3b82f6;
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --popover: #ffffff;
+    --popover-foreground: #0f172a;
+    --primary: #2563eb;
     --primary-foreground: #ffffff;
-    --secondary: #1e1b4b;
-    --secondary-foreground: #ffffff;
-    --muted: #111116;
-    --muted-foreground: #94a3b8;
-    --accent: #6366f1;
+    --secondary: #e0e7ff;
+    --secondary-foreground: #1e1b4b;
+    --muted: #f1f5f9;
+    --muted-foreground: #475569;
+    --accent: #4f46e5;
     --accent-foreground: #ffffff;
     --destructive: #ef4444;
     --destructive-foreground: #fafafa;
-    --border: #1e293b;
-    --input: #1e293b;
-    --ring: #3b82f6;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #2563eb;
     --radius: 8px;
-    --sidebar-background: #020205;
-    --sidebar-foreground: #94a3b8;
-    --sidebar-primary: #3b82f6;
+    --sidebar-background: #ffffff;
+    --sidebar-foreground: #475569;
+    --sidebar-primary: #2563eb;
     --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #08080f;
-    --sidebar-accent-foreground: #ffffff;
-    --sidebar-border: #1e293b;
-    --sidebar-ring: #3b82f6;
+    --sidebar-accent: #f1f5f9;
+    --sidebar-accent-foreground: #0f172a;
+    --sidebar-border: #e2e8f0;
+    --sidebar-ring: #2563eb;
   }
+
+    .dark {
+      --background: #020205;
+      --foreground: #ffffff;
+      --card: #08080f;
+      --card-foreground: #ffffff;
+      --popover: #08080f;
+      --popover-foreground: #ffffff;
+      --primary: #3b82f6;
+      --primary-foreground: #ffffff;
+      --secondary: #1e1b4b;
+      --secondary-foreground: #ffffff;
+      --muted: #111116;
+      --muted-foreground: #cbd5e1;
+      --accent: #6366f1;
+      --accent-foreground: #ffffff;
+      --destructive: #ef4444;
+      --destructive-foreground: #fafafa;
+      --border: #2d3748;
+      --input: #2d3748;
+      --ring: #3b82f6;
+      --sidebar-background: #020205;
+      --sidebar-foreground: #cbd5e1;
+      --sidebar-primary: #3b82f6;
+      --sidebar-primary-foreground: #ffffff;
+      --sidebar-accent: #08080f;
+      --sidebar-accent-foreground: #ffffff;
+      --sidebar-border: #2d3748;
+      --sidebar-ring: #3b82f6;
+    }
 }
 
 @layer base {
@@ -135,9 +166,16 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
     background-image: 
+      linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .dark body,
+  body:is(.dark *) {
+    background-image: 
       linear-gradient(to right, rgba(30, 41, 59, 0.15) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(30, 41, 59, 0.15) 1px, transparent 1px);
-    background-size: 80px 80px;
   }
 
   h1 {
@@ -203,41 +241,95 @@
 
   .glass-effect {
     backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .glass-effect {
     background-color: rgba(2, 2, 5, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .neon-glow {
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.25);
+  }
+
+  .dark .neon-glow {
     box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
   }
 
   .obsidian-card {
-    background: linear-gradient(135deg, rgba(8, 8, 15, 0.9) 0%, rgba(2, 2, 5, 1) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 1) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
   }
 
+  .dark .obsidian-card {
+    background: linear-gradient(135deg, rgba(8, 8, 15, 0.9) 0%, rgba(2, 2, 5, 1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
   .obsidian-card:hover {
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: rgba(37, 99, 235, 0.3);
     transform: translateY(-4px);
   }
 
+  .dark .obsidian-card:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+
   .text-glow {
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .text-glow {
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
   }
 
-  .hide-scrollbar {
+  .hide-scrollbar,
+  .scrollbar-hide {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
 
-  .hide-scrollbar::-webkit-scrollbar {
+  .hide-scrollbar::-webkit-scrollbar,
+  .scrollbar-hide::-webkit-scrollbar {
     display: none;  /* Chrome, Safari and Opera */
+  }
+  
+  /* Touch manipulation for better mobile interactions */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  /* Safe area padding for notched devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
   .grid-command {
-    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.08) 1px, transparent 0);
     background-size: 40px 40px;
+  }
+
+  .dark .grid-command {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
   }
 
   @keyframes fadeIn {
@@ -372,6 +464,10 @@
     main > section:not(:first-child) {
       position: relative;
       z-index: 10;
+      background-color: var(--background);
+    }
+
+    .dark main > section:not(:first-child) {
       background-color: #020202;
     }
   }

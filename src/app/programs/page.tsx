@@ -17,11 +17,11 @@ interface Program {
 }
 
 const IconMap: Record<string, React.ReactNode> = {
-  'graduation-cap': <GraduationCap size={20} />,
-  'star': <Star size={20} />,
-  'trophy': <Trophy size={20} />,
-  'rocket': <Rocket size={20} />,
-  'target': <Target size={20} />,
+  'graduation-cap': <GraduationCap size={20} className="text-emerald-500" />,
+  'star': <Star size={20} className="text-amber-400" />,
+  'trophy': <Trophy size={20} className="text-yellow-500" />,
+  'rocket': <Rocket size={20} className="text-primary" />,
+  'target': <Target size={20} className="text-accent" />,
 };
 
 const levelColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -115,7 +115,7 @@ export default function ProgramsPage() {
                     onMouseLeave={() => setHoveredProgram(null)}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent transition-opacity duration-500 ${hoveredProgram === program.id ? 'opacity-100' : 'opacity-0'}`} />
-                    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 group-hover:text-primary transition-all duration-500 group-hover:scale-110 -rotate-12 group-hover:rotate-0">
                       <BookOpen size={80} />
                     </div>
                     
@@ -198,7 +198,7 @@ export default function ProgramsPage() {
                 <div className="relative">
                   <div className="aspect-video rounded-2xl overflow-hidden bg-white/[0.02] border border-white/10 flex items-center justify-center group cursor-pointer">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all">
+                    <div className="w-20 h-20 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center text-primary/60 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all shadow-[0_0_20px_rgba(var(--primary),0.1)] group-hover:shadow-[0_0_30px_rgba(var(--primary),0.3)]">
                       <Users size={28} />
                     </div>
                   </div>

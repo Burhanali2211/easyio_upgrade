@@ -91,6 +91,34 @@ ${data.company ? `🏢 <b>Company:</b> ${escapeHtml(data.company)}\n` : ''}
 💬 <b>Message:</b>
 ${escapeHtml(data.message)}
 
+  ⏰ <i>Received: ${new Date().toLocaleString()}</i>
+  `.trim();
+}
+
+export function formatDeploymentBriefMessage(data: {
+  company_name: string;
+  contact_name: string;
+  email: string;
+  team_size?: string;
+  training_needs?: string;
+  project_timeline?: string;
+  additional_info?: string;
+}): string {
+  return `
+🚀 <b>New Deployment Brief Request</b>
+
+🏢 <b>Company:</b> ${escapeHtml(data.company_name)}
+👤 <b>Contact:</b> ${escapeHtml(data.contact_name)}
+📧 <b>Email:</b> ${escapeHtml(data.email)}
+👥 <b>Team Size:</b> ${escapeHtml(data.team_size || 'Not specified')}
+🗓️ <b>Timeline:</b> ${escapeHtml(data.project_timeline || 'Not specified')}
+
+📝 <b>Training Needs:</b>
+${escapeHtml(data.training_needs || 'Not specified')}
+
+ℹ️ <b>Additional Info:</b>
+${escapeHtml(data.additional_info || 'Not specified')}
+
 ⏰ <i>Received: ${new Date().toLocaleString()}</i>
   `.trim();
 }

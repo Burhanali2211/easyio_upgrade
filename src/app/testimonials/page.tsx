@@ -83,14 +83,14 @@ export default function TestimonialsPage() {
                       "{t.content}"
                     </p>
                     
-                    <div className="flex items-center gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-white/5">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white/5 overflow-hidden">
-                        <img 
-                          src={t.image || `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`} 
-                          alt={t.name} 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      <div className="flex items-center gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-white/5">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/5 overflow-hidden ring-2 ring-emerald-500/20 ring-offset-2 ring-offset-[#020202]">
+                          <img 
+                            src={t.image || `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`} 
+                            alt={t.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                       <div>
                         <h4 className="text-base sm:text-lg font-bold text-white">{t.name}</h4>
                         <p className="text-xs sm:text-sm text-emerald-500/60 font-mono uppercase tracking-widest">{t.role} @ {t.company}</p>

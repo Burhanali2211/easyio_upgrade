@@ -54,6 +54,19 @@ export const getProjects = unstable_cache(
   { revalidate: 3600 }
 );
 
+export const getProjectById = unstable_cache(
+  async (id: string) => {
+    const { data } = await supabase
+      .from('projects')
+      .select('*')
+      .eq('id', id)
+      .single();
+    return data;
+  },
+  ['project'],
+  { revalidate: 3600 }
+);
+
 export const getInnovationHub = unstable_cache(
   async () => {
     const { data } = await supabase

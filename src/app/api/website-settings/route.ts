@@ -18,10 +18,11 @@ const getDbClient = async () => {
   });
 
   try {
-    await client.connect();
-  } catch (connectError: any) {
-    throw connectError;
-  }
+      await client.connect();
+    } catch (connectError: unknown) {
+      const error = connectError as Error;
+      throw new Error(`Failed to connect to database: ${error.message}`);
+    }
   
   return client;
 };

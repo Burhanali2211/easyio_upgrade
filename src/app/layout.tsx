@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { VisualEditsMessenger } from "orchids-visual-edits";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
-import CustomCursor from "@/components/ui/custom-cursor";
+
 import ComprehensiveSEO from "@/components/seo/ComprehensiveSEO";
 import { primaryKeywords, allKeywords } from "@/lib/seo/seoOptimization";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -104,28 +106,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable}`}>
-      <body className="antialiased font-sans bg-[#050508]">
-        <ComprehensiveSEO />
-        <Script
-          id="orchids-browser-logs"
-          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/orchids-browser-logs.js"
-          strategy="afterInteractive"
-          data-orchids-project-id="afb2314f-67e2-407d-89d7-103620cb16db"
-        />
-        <ErrorReporter />
-        <Script
-          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
-          strategy="afterInteractive"
-          data-target-origin="*"
-          data-message-type="ROUTE_CHANGE"
-          data-include-search-params="true"
-          data-only-in-iframe="true"
-          data-debug="true"
-          data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
-        />
-        <CustomCursor />
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Script
+            id="orchids-browser-logs"
+            src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/orchids-browser-logs.js"
+            strategy="afterInteractive"
+            data-orchids-project-id="fc58627a-e9ba-4e7e-b15c-55a22843e29d"
+          />
+            <ErrorReporter />
+            <ComprehensiveSEO />
+            <Script
+
+            src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
+            strategy="afterInteractive"
+            data-target-origin="*"
+            data-message-type="ROUTE_CHANGE"
+            data-include-search-params="true"
+            data-only-in-iframe="true"
+            data-debug="true"
+            data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
+          />
+            {children}
+          <VisualEditsMessenger />
+        </ThemeProvider>
       </body>
     </html>
   );

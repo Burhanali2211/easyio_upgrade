@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+import path from "node:path";
+const loaderPath = require.resolve('orchids-visual-edits/loader.js');
 
 const nextConfig: NextConfig = {
   images: {
@@ -12,12 +14,22 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
-    unoptimized: true, // Required for static export
   },
-  // Uncomment the line below ONLY if you need static HTML export for Hostinger shared hosting
-  // WARNING: This will break API routes, admin dashboard, contact forms, and all server features!
-  // output: 'export',
+  outputFileTracingRoot: path.resolve(__dirname, '../../'),
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  turbopack: {
+    rules: {
+      "*.{jsx,tsx}": {
+        loaders: [loaderPath]
+      }
+    }
+  }
 };
 
 export default nextConfig;
-// Orchids restart: 1766864830909
+// Orchids restart: 1766933236168

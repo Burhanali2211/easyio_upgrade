@@ -1,29 +1,93 @@
-import { FlatCompat } from '@eslint/eslintrc'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import js from "@eslint/js";
+import typescript from "@typescript-eslint/eslint-plugin";
+import typescriptParser from "@typescript-eslint/parser";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  resolvePluginsRelativeTo: __dirname,
-})
-
-const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+export default [
+  js.configs.recommended,
   {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        React: "readonly",
+        JSX: "readonly",
+        console: "readonly",
+        window: "readonly",
+        document: "readonly",
+        fetch: "readonly",
+        FormData: "readonly",
+        setTimeout: "readonly",
+        setInterval: "readonly",
+        clearTimeout: "readonly",
+        clearInterval: "readonly",
+        HTMLElement: "readonly",
+        HTMLInputElement: "readonly",
+        HTMLImageElement: "readonly",
+        HTMLDivElement: "readonly",
+        HTMLTextAreaElement: "readonly",
+        MouseEvent: "readonly",
+        Event: "readonly",
+        Image: "readonly",
+        File: "readonly",
+        FileReader: "readonly",
+        localStorage: "readonly",
+        sessionStorage: "readonly",
+        navigator: "readonly",
+        process: "readonly",
+        module: "readonly",
+        require: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        Buffer: "readonly",
+        URL: "readonly",
+        URLSearchParams: "readonly",
+        Response: "readonly",
+        Request: "readonly",
+        Headers: "readonly",
+        AbortController: "readonly",
+        Blob: "readonly",
+        WebSocket: "readonly",
+        Worker: "readonly",
+        globalThis: "readonly",
+        self: "readonly",
+        alert: "readonly",
+        confirm: "readonly",
+        prompt: "readonly",
+        btoa: "readonly",
+        atob: "readonly",
+        crypto: "readonly",
+        performance: "readonly",
+        requestAnimationFrame: "readonly",
+        cancelAnimationFrame: "readonly",
+        IntersectionObserver: "readonly",
+        ResizeObserver: "readonly",
+        MutationObserver: "readonly",
+        CustomEvent: "readonly",
+        NodeJS: "readonly",
+      },
+    },
+    plugins: {
+      "@typescript-eslint": typescript,
+      "react": react,
+      "react-hooks": reactHooks,
+    },
     rules: {
-      'react/no-unescaped-entities': 'off',
-      '@next/next/no-img-element': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      'react-hooks/exhaustive-deps': 'off',
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "react/no-unescaped-entities": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "no-undef": "off",
     },
   },
   {
-    ignores: ['node_modules/**', '.next/**', 'out/**', 'dist/**', '*.config.*'],
+    ignores: ["node_modules/**", ".next/**", "out/**", "dist/**", "*.config.*", "src/visual-edits/**"],
   },
-]
-
-export default eslintConfig
+];

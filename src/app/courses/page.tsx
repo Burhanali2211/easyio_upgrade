@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { BookOpen, ArrowRight, Loader2, FlaskConical, Beaker, Atom, Sparkles, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { DeploymentBriefModal } from "@/components/sections/deployment-brief-modal";
 
 interface Course {
   id: string;
@@ -35,6 +36,7 @@ export default function CoursesPage() {
   const [experiments, setExperiments] = useState<LabExperiment[]>([]);
   const [loading, setLoading] = useState(true);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
+  const [isBriefModalOpen, setIsBriefModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -217,7 +219,10 @@ export default function CoursesPage() {
                       <p className="text-white/40 max-w-md mb-8">
                         Custom-tailored curriculum for your organization. Transform your engineering team into infrastructure architects.
                       </p>
-                      <button className="px-8 py-4 bg-white text-black font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-transform">
+                      <button 
+                        onClick={() => setIsBriefModalOpen(true)}
+                        className="px-8 py-4 bg-white text-black font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-transform"
+                      >
                         Request Deployment Brief
                       </button>
                     </div>
@@ -244,6 +249,11 @@ export default function CoursesPage() {
         
         <Footer />
       </main>
+
+      <DeploymentBriefModal 
+        isOpen={isBriefModalOpen} 
+        onClose={() => setIsBriefModalOpen(false)} 
+      />
     </div>
   );
 }

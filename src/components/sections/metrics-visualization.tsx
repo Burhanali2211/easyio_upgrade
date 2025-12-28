@@ -74,7 +74,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
   }, [metrics]);
 
   return (
-    <section className="py-16 sm:py-24 relative overflow-hidden bg-[#020202] z-10">
+    <section className="py-16 sm:py-24 relative overflow-hidden bg-background dark:bg-[#020202] z-10">
       <div className="container relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {metrics.map((metric, index) => {
@@ -86,12 +86,12 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
               <div
                 key={metric.id}
                 style={{ animationDelay: `${index * 100}ms` }}
-                className="group obsidian-card p-5 sm:p-6 rounded-2xl border border-white/5 relative overflow-hidden animate-fadeIn hover:border-white/10 transition-all duration-200"
+                className="group obsidian-card p-5 sm:p-6 rounded-2xl border border-border dark:border-white/5 relative overflow-hidden animate-fadeIn hover:border-primary/20 dark:hover:border-white/10 transition-all duration-200"
               >
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                    <div className="p-2 rounded-lg bg-muted dark:bg-white/5 border border-border dark:border-white/10">
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
                     <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-muted-foreground">
@@ -101,7 +101,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
 
                   {/* Value */}
                   <div className="mb-4">
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight mb-1">
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-foreground tracking-tight mb-1">
                       {displayValue}
                     </div>
                     <div className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wider font-mono">
@@ -115,7 +115,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
                       {barHeights.map((height, i) => (
                         <div
                           key={i}
-                          className="flex-1 bg-white/20 rounded-t-[1px] transition-all duration-300 group-hover:bg-white/30"
+                          className="flex-1 bg-foreground/20 dark:bg-white/20 rounded-t-[1px] transition-all duration-300 group-hover:bg-foreground/30 dark:group-hover:bg-white/30"
                           style={{ 
                             height: `${height}%`,
                             transitionDelay: `${i * 20}ms`

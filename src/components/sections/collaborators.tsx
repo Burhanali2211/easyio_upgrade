@@ -107,13 +107,13 @@ const Collaborators = memo(({ partners = [] }: CollaboratorsProps) => {
   const duplicatedPartners = useMemo(() => [...partners, ...partners], [partners]);
 
   return (
-    <section className="relative w-full bg-[#020202] py-10 sm:py-16 overflow-hidden border-y border-white/5 z-10">
+    <section className="relative w-full bg-background dark:bg-[#020202] py-10 sm:py-16 overflow-hidden border-y border-border dark:border-white/5 z-10">
       <div className="container mx-auto relative z-10 mb-6 sm:mb-8">
         <div className="text-center lg:text-left">
           <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-primary mb-2 block">
             Ecosystem Partners
           </span>
-          <h2 className="text-lg sm:text-xl font-display font-bold text-white">
+          <h2 className="text-lg sm:text-xl font-display font-bold text-foreground">
             Trusted by Industry Leaders
           </h2>
         </div>
@@ -129,9 +129,9 @@ const Collaborators = memo(({ partners = [] }: CollaboratorsProps) => {
             return (
               <div 
                 key={`${partner.id}-${index}`}
-                className="flex items-center gap-2 sm:gap-3 text-muted-foreground hover:text-white transition-colors group cursor-default mx-6 sm:mx-10"
+                className="flex items-center gap-2 sm:gap-3 text-muted-foreground hover:text-foreground transition-colors group cursor-default mx-6 sm:mx-10"
               >
-                <div className="p-1.5 sm:p-2 rounded-lg bg-white/5 group-hover:bg-primary/10 transition-colors flex-shrink-0">
+                <div className="p-1.5 sm:p-2 rounded-lg bg-muted dark:bg-white/5 group-hover:bg-primary/10 transition-colors flex-shrink-0">
                   <Icon size={20} className="sm:w-6 sm:h-6" strokeWidth={1.5} />
                 </div>
                 <span className="font-mono text-xs sm:text-sm font-bold tracking-tighter uppercase whitespace-nowrap">
