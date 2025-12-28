@@ -116,7 +116,6 @@
         "@typescript-eslint/eslint-plugin": "^8.0.0",
         "@typescript-eslint/parser": "^8.0.0",
         "eslint": "^9.38.0",
-        "eslint-config-next": "^15.3.8",
         "eslint-plugin-react": "^7.37.0",
         "eslint-plugin-react-hooks": "^5.1.0",
         "tailwindcss": "^4",
