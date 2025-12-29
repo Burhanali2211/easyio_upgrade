@@ -1,12 +1,40 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Navigation from "@/components/sections/navigation";
-import OurWork from "@/components/sections/our-work";
 import Footer from "@/components/sections/footer";
+import ProjectsGrid from "@/components/pages/projects/ProjectsGrid";
 import { motion } from "framer-motion";
-import { Code2, Database, Globe, Shield, TrendingUp, ArrowRight } from "lucide-react";
+import { Code2, Database, Globe, Shield } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { Project } from "@/components/sections/our-work/types";
 
 export default function OurWorkPage() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) {
+          console.error('Error fetching projects:', error);
+        } else {
+          setProjects(data || []);
+        }
+      } catch (err) {
+        console.error('Unexpected error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProjects();
+  }, []);
+
   const highlights = [
     { icon: <Code2 size={18} />, label: "Custom Systems", value: "50+" },
     { icon: <Database size={18} />, label: "ERP Deployments", value: "30+" },
@@ -73,7 +101,8 @@ export default function OurWorkPage() {
               ))}
             </motion.div>
           </div>
-          <OurWork />
+          
+          <ProjectsGrid projects={projects} loading={loading} />
         </motion.div>
         <Footer />
       </main>

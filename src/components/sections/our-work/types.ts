@@ -12,4 +12,5 @@ export interface Project {
   live_url?: string;
   case_study?: string;
   featured?: boolean;
+  created_at?: string;
 }

@@ -35,7 +35,20 @@ const nextConfig: NextConfig = {
       exclude: ['error', 'warn'],
     } : false,
   },
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
+    // Suppress webpack cache warnings in development
+    if (dev) {
+      config.infrastructureLogging = {
+        level: 'error',
+      };
+      // Disable cache warnings
+      config.ignoreWarnings = [
+        { module: /node_modules/ },
+        { message: /Restoring failed/ },
+        { message: /incorrect data check/ },
+      ];
+    }
+    
     // Optimize bundle size
     if (!isServer) {
       config.optimization = {
