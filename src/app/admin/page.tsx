@@ -58,17 +58,28 @@ export default function AdminPage() {
   } = useImageUpload();
 
   useEffect(() => {
+    let mounted = true;
+    
     supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!mounted) return;
       setSession(session);
-      if (session) fetchData(activeTab);
+      if (session) {
+        fetchData(activeTab);
+      }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
       setSession(session);
-      if (session) fetchData(activeTab);
+      if (session) {
+        fetchData(activeTab);
+      }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [activeTab, fetchData]);
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -139,7 +150,9 @@ export default function AdminPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     handleImageUpload(file, type, activeTab, (url, uploadType) => {
-      if (uploadType === 'image') {
+      if (activeTab === 'partners') {
+        setFormData((prev: any) => ({ ...prev, logo_url: url }));
+      } else if (uploadType === 'image') {
         setFormData((prev: any) => ({ ...prev, image: url }));
       } else {
         if (activeTab === 'testimonials') {
@@ -151,14 +164,6 @@ export default function AdminPage() {
     });
     e.target.value = '';
   }, [activeTab, handleImageUpload]);
-
-  if (loading && !data.length && !session) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="animate-spin text-primary" size={40} />
-      </div>
-    );
-  }
 
   if (!session) {
     return (

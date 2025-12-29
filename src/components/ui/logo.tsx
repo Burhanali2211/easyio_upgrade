@@ -88,7 +88,7 @@ const Logo = ({ className = "" }: { className?: string }) => {
           <span className="text-xl font-display font-black tracking-tighter text-white leading-none">
             {siteName.includes('IO') ? (
               <>
-                {siteName.split('IO')[0]}<span className="text-primary">IO</span>
+                {siteName.split('IO')[0]}<span className="text-white">IO</span>
               </>
             ) : (
               siteName
@@ -153,7 +153,7 @@ const Logo = ({ className = "" }: { className?: string }) => {
         <span className="text-xl font-display font-black tracking-tighter text-white leading-none">
           {siteName.includes('IO') ? (
             <>
-              {siteName.split('IO')[0]}<span className="text-primary">IO</span>
+              {siteName.split('IO')[0]}<span className="text-white">iO</span>
             </>
           ) : (
             siteName

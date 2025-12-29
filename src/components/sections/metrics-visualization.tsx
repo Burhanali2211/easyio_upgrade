@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import { Activity, Globe, Server, Shield } from "lucide-react";
 
 interface Metric {
@@ -33,6 +33,9 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
   const [heights, setHeights] = useState<Record<string, number[]>>({});
   const [isClient, setIsClient] = useState(false);
   const [animatedValues, setAnimatedValues] = useState<Record<string, string>>({});
+  const animationFrameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<Record<string, number>>({});
+  const targetValuesRef = useRef<Record<string, number>>({});
 
   useEffect(() => {
     setIsClient(true);
@@ -46,31 +49,76 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
     });
     setHeights(newHeights);
 
-    // Animate values on mount
+    // Initialize target values and start times for animation
+    const targets: Record<string, number> = {};
+    const startTimes: Record<string, number> = {};
+    const initialValues: Record<string, string> = {};
+
     metrics.forEach((metric) => {
       const numericValue = metric.value.match(/\d+/)?.[0];
       if (numericValue) {
-        const target = parseInt(numericValue);
-        let current = 0;
-        const increment = target / 40;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
-          setAnimatedValues(prev => ({
-            ...prev,
-            [metric.id]: metric.value.replace(numericValue, Math.floor(current).toString())
-          }));
-        }, 25);
+        targets[metric.id] = parseInt(numericValue);
+        startTimes[metric.id] = performance.now();
+        initialValues[metric.id] = metric.value.replace(numericValue, "0");
       } else {
-        setAnimatedValues(prev => ({
-          ...prev,
-          [metric.id]: metric.value
-        }));
+        initialValues[metric.id] = metric.value;
       }
     });
+
+    targetValuesRef.current = targets;
+    startTimeRef.current = startTimes;
+    setAnimatedValues(initialValues);
+
+    // Animate using requestAnimationFrame
+    const animate = (currentTime: number) => {
+      const updates: Record<string, string> = {};
+      let hasUpdates = false;
+
+      metrics.forEach((metric) => {
+        const target = targetValuesRef.current[metric.id];
+        if (target !== undefined) {
+          const startTime = startTimeRef.current[metric.id];
+          const elapsed = currentTime - startTime;
+          const duration = 1000; // 1 second animation
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Ease out cubic
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(target * easeProgress);
+          
+          const numericValue = metric.value.match(/\d+/)?.[0];
+          if (numericValue) {
+            updates[metric.id] = metric.value.replace(numericValue, current.toString());
+            hasUpdates = true;
+          }
+        }
+      });
+
+      if (hasUpdates) {
+        setAnimatedValues(prev => ({ ...prev, ...updates }));
+      }
+
+      // Continue animation if not complete
+      const isComplete = metrics.every((metric) => {
+        const target = targetValuesRef.current[metric.id];
+        if (target === undefined) return true;
+        const startTime = startTimeRef.current[metric.id];
+        const elapsed = currentTime - startTime;
+        return elapsed >= 1000;
+      });
+
+      if (!isComplete) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
   }, [metrics]);
 
   return (
@@ -109,7 +157,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
                     </div>
                   </div>
 
-                  {/* Bar chart - subtle and clean */}
+                  {/* Bar chart - subtle and clean with CSS animation */}
                   {isClient && (
                     <div className="flex items-end gap-[2px] h-8 sm:h-10 w-full overflow-hidden opacity-30 group-hover:opacity-50 transition-opacity">
                       {barHeights.map((height, i) => (
@@ -118,7 +166,9 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
                           className="flex-1 bg-foreground/20 dark:bg-white/20 rounded-t-[1px] transition-all duration-300 group-hover:bg-foreground/30 dark:group-hover:bg-white/30"
                           style={{ 
                             height: `${height}%`,
-                            transitionDelay: `${i * 20}ms`
+                            transitionDelay: `${i * 20}ms`,
+                            transform: 'translateZ(0)',
+                            willChange: 'height, opacity'
                           }}
                         />
                       ))}

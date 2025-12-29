@@ -79,7 +79,10 @@ export function useImageUpload() {
   }, []);
 
   const setPreviewsFromItem = useCallback((item: any, activeTab: string) => {
-    if (item.image) {
+    if (activeTab === 'partners' && item.logo_url) {
+      setImagePreview(item.logo_url);
+      setImageUploadMode('url');
+    } else if (item.image) {
       setImagePreview(item.image);
       setImageUploadMode('url');
     }

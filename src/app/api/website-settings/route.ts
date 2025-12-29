@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Client } from 'pg';
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { CACHE_TAGS } from '@/lib/cache/config';
 
 // Direct PostgreSQL connection using pooler (works for simple queries)
 const getDbClient = async () => {
@@ -105,9 +107,21 @@ export async function GET() {
       'SELECT id, setting_key, setting_value, created_at, updated_at FROM public.website_settings ORDER BY setting_key'
     );
 
-    return NextResponse.json({ 
-      data: result.rows 
-    });
+    // Return with proper cache headers
+    return NextResponse.json(
+      { 
+        data: result.rows,
+        cached: true,
+        timestamp: new Date().toISOString(),
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+          'CDN-Cache-Control': 'public, s-maxage=300',
+          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+        },
+      }
+    );
   } catch (error: any) {
     console.error('Error fetching website settings:', error);
     return NextResponse.json(
@@ -115,7 +129,12 @@ export async function GET() {
         error: error.message || 'Internal server error',
         details: error.stack 
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
     );
   } finally {
     if (client) {
@@ -193,10 +212,32 @@ export async function POST(request: NextRequest) {
 
     const allSuccess = results.every(r => r.success);
     
-    return NextResponse.json({
-      success: allSuccess,
-      results
-    }, { status: allSuccess ? 200 : 207 });
+    // Invalidate cache after successful update
+    if (allSuccess) {
+      try {
+        revalidateTag(CACHE_TAGS.WEBSITE_SETTINGS);
+        revalidatePath('/');
+        revalidatePath('/admin');
+      } catch (cacheError) {
+        console.error('Cache invalidation error:', cacheError);
+        // Don't fail the request if cache invalidation fails
+      }
+    }
+    
+    return NextResponse.json(
+      {
+        success: allSuccess,
+        results,
+        cacheInvalidated: allSuccess,
+      },
+      { 
+        status: allSuccess ? 200 : 207,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+      }
+    );
   } catch (error: any) {
     console.error('Error in POST website settings:', error);
     return NextResponse.json(

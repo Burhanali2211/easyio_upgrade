@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Inter, Syne, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { VisualEditsMessenger } from "orchids-visual-edits";
 import ErrorReporter from "@/components/ErrorReporter";
@@ -12,6 +12,27 @@ import { ThemeProvider } from "@/components/theme-provider";
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["600", "700", "800"],
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://easyio.tech";
@@ -79,12 +100,12 @@ export const metadata: Metadata = {
   classification: "Software Development Company",
   icons: {
     icon: [
-      { url: "/logo.png", type: "image/png" },
+      { url: "/logo.png", type: "image/png", sizes: "any" },
       { url: "/logo.png", type: "image/png", sizes: "32x32" },
       { url: "/logo.png", type: "image/png", sizes: "16x16" },
     ],
     apple: [
-      { url: "/logo.png", type: "image/png" },
+      { url: "/logo.png", type: "image/png", sizes: "180x180" },
     ],
     shortcut: "/logo.png",
   },
@@ -107,25 +128,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://slelguoygbfzlpylpxfs.supabase.co" />
+        <link rel="dns-prefetch" href="https://slelguoygbfzlpylpxfs.supabase.co" />
+      </head>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} ${syne.variable} ${jetBrainsMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
+          <ErrorReporter />
+          <ComprehensiveSEO />
           <Script
             id="orchids-browser-logs"
             src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/orchids-browser-logs.js"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             data-orchids-project-id="fc58627a-e9ba-4e7e-b15c-55a22843e29d"
           />
-            <ErrorReporter />
-            <ComprehensiveSEO />
-            <Script
-
+          <Script
+            id="route-messenger"
             src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             data-target-origin="*"
             data-message-type="ROUTE_CHANGE"
             data-include-search-params="true"
@@ -133,7 +160,7 @@ export default function RootLayout({
             data-debug="true"
             data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
           />
-            {children}
+          {children}
           <VisualEditsMessenger />
         </ThemeProvider>
       </body>

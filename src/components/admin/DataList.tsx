@@ -40,12 +40,18 @@ const DataList = memo(({ data, loading, activeTab, onEdit, onDelete, onAdd }: Da
       </div>
 
       <div className="space-y-3 sm:space-y-4">
-        {loading && data.length > 0 && (
-          <div className="flex items-center justify-center p-4">
-            <Loader2 className="animate-spin text-primary" size={24} />
+        {loading && data.length === 0 ? (
+          <div className="flex items-center justify-center p-12 sm:p-20">
+            <Loader2 className="animate-spin text-primary" size={32} />
           </div>
-        )}
-        <AnimatePresence mode="popLayout">
+        ) : (
+          <>
+            {loading && data.length > 0 && (
+              <div className="flex items-center justify-center p-4">
+                <Loader2 className="animate-spin text-primary" size={24} />
+              </div>
+            )}
+            <AnimatePresence mode="popLayout">
           {isMessages ? (
             data.map((item: any) => (
               <motion.div 
@@ -145,10 +151,12 @@ const DataList = memo(({ data, loading, activeTab, onEdit, onDelete, onAdd }: Da
             ))
           )}
         </AnimatePresence>
-        {!loading && data.length === 0 && (
-          <div className="text-center py-12 sm:py-20 obsidian-card rounded-2xl sm:rounded-3xl border border-white/5">
-            <p className="text-white/20 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest px-4">No data detected in this sector</p>
-          </div>
+            {!loading && data.length === 0 && (
+              <div className="text-center py-12 sm:py-20 obsidian-card rounded-2xl sm:rounded-3xl border border-white/5">
+                <p className="text-white/20 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest px-4">No data detected in this sector</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

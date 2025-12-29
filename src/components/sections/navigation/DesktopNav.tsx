@@ -19,17 +19,34 @@ export default function DesktopNav({ networkStats, socialLinks }: DesktopNavProp
   const pathname = usePathname();
 
   return (
-    <div className="fixed left-0 top-0 bottom-0 w-[288px] z-[100] hidden lg:block border-r border-border bg-background">
-      <nav className="flex flex-col h-full">
-        <div className="pt-12 pb-16 flex flex-col items-center">
+    <div 
+      data-fixed-sidebar
+      className="fixed left-0 top-0 w-[288px] z-[100] hidden lg:block border-r border-border bg-background"
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        height: '100vh',
+        width: '288px',
+        overflow: 'hidden',
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        isolation: 'isolate',
+      } as React.CSSProperties}
+    >
+      <nav className="flex flex-col h-full overflow-hidden">
+        <div className="pt-12 pb-4 flex flex-col items-center flex-shrink-0">
           <div className="mb-8 flex items-center justify-between w-full px-6">
             <Link href="/" className="block transition-opacity hover:opacity-80">
               <Logo />
             </Link>
             <ThemeToggle />
           </div>
+        </div>
 
-          <div className="w-full flex flex-col space-y-1 px-4 max-h-[60vh] overflow-y-auto hide-scrollbar">
+        <div className="flex-1 overflow-y-auto hide-scrollbar min-h-0 w-full px-4">
+          <div className="flex flex-col space-y-1 pb-4">
             {menuItems.map((item) => {
               const isActive = pathname === item.href;
               const Icon = item.icon;
@@ -44,7 +61,7 @@ export default function DesktopNav({ networkStats, socialLinks }: DesktopNavProp
                   }`}
                 >
                   {isActive && (
-                    <div className="absolute left-0 w-1 h-6 bg-[#20BA9D] rounded-r-full" />
+                    <div className="absolute left-0 w-1 h-6 bg-white rounded-r-full" />
                   )}
                     <div className={`mr-4 transition-all duration-300 ${isActive ? item.color : `text-muted-foreground group-hover:${item.color}`} group-hover:scale-110 group-hover:rotate-3`}>
                       <Icon size={18} />
@@ -52,14 +69,14 @@ export default function DesktopNav({ networkStats, socialLinks }: DesktopNavProp
                   <span className="text-[11px] font-black uppercase tracking-[0.15em] font-mono">
                     {item.name}
                   </span>
-                  <ChevronRight size={12} className={`ml-auto opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? "opacity-100 text-[#20BA9D]" : ""}`} />
+                  <ChevronRight size={12} className={`ml-auto opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? "opacity-100 text-white" : ""}`} />
                 </Link>
               );
             })}
           </div>
         </div>
 
-        <div className="mt-auto p-6 space-y-4">
+        <div className="mt-auto p-6 space-y-4 flex-shrink-0">
           <NetworkStatsWidget networkStats={networkStats} />
           <SocialLinks links={socialLinks} size="sm" />
         </div>

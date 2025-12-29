@@ -79,7 +79,7 @@ export const getFormDefaults = (tab: Tab): Record<string, any> => {
     logic_engines: { title: '', description: '', icon_type: 'brain' },
     erp_features: { title: '', description: '', icon_type: 'database' },
     programs: { title: '', duration: '', level: '', description: '', icon_type: 'graduation-cap' },
-    partners: { name: '', icon_type: 'cpu' },
+    partners: { name: '', logo_url: '' },
     metrics: { label: '', value: '', sub_label: '', icon_type: 'globe', color_theme: 'blue' },
     home_solutions: { title: '', category: '', description: '', icon_type: 'database', accent_color: 'blue', features: [] },
     innovation_hub: { title: '', category: '', description: '', icon_type: 'rocket', stats: '' },

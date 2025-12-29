@@ -7,7 +7,7 @@ import { Tab } from '../types';
 
 export function useAdminData() {
   const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [websiteSettings, setWebsiteSettings] = useState<Record<string, string>>({});
   const [logoPreview, setLogoPreview] = useState<string>('');
 
@@ -128,17 +128,6 @@ export function useAdminData() {
           .eq('id', editingItem.id)
           .select();
           
-        if (error && error.code === 'PGRST204' && activeTab === 'partners' && dataToSave.icon_type) {
-          const dataToSaveWithoutIconType = { ...dataToSave };
-          delete dataToSaveWithoutIconType.icon_type;
-          const retryResult = await supabase
-            .from(activeTab)
-            .update(dataToSaveWithoutIconType)
-            .eq('id', editingItem.id)
-            .select();
-          updatedData = retryResult.data;
-          error = retryResult.error;
-        }
           
         if (error) {
           console.error('Update error:', error);
@@ -156,16 +145,6 @@ export function useAdminData() {
           .insert([dataToSave])
           .select();
         
-        if (error && error.code === 'PGRST204' && activeTab === 'partners' && dataToSave.icon_type) {
-          const dataToSaveWithoutIconType = { ...dataToSave };
-          delete dataToSaveWithoutIconType.icon_type;
-          const retryResult = await supabase
-            .from(activeTab)
-            .insert([dataToSaveWithoutIconType])
-            .select();
-          insertedData = retryResult.data;
-          error = retryResult.error;
-        }
           
         if (error) {
           console.error('Insert error:', error);

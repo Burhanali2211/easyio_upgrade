@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
       .upload(filePath, buffer, {
         contentType: file.type,
         upsert: false,
-        cacheControl: '3600',
+        cacheControl: 'public, max-age=31536000, immutable', // 1 year for uploaded assets
       });
 
     uploadData = uploadResult.data;
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
         .upload(finalFileName, buffer, {
           contentType: file.type,
           upsert: false,
-          cacheControl: '3600',
+          cacheControl: 'public, max-age=31536000, immutable', // 1 year for uploaded assets
         });
       
       uploadData = retryResult.data;

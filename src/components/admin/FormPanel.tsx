@@ -140,10 +140,19 @@ const FormPanel = memo(({
         </button>
       </div>
       {mode === 'url' && (
-        <input type="text" value={type === 'image' ? (formData.image || '') : (activeTab === 'testimonials' ? formData.image || '' : formData.avatar || '')}
+        <input type="text" value={
+          activeTab === 'partners' ? (formData.logo_url || '') :
+          type === 'image' ? (formData.image || '') : 
+          (activeTab === 'testimonials' ? formData.image || '' : formData.avatar || '')
+        }
           onChange={(e) => {
-            if (type === 'image') { onFormDataChange({...formData, image: e.target.value}); onPreviewChange(e.target.value); }
-            else { 
+            if (activeTab === 'partners') {
+              onFormDataChange({...formData, logo_url: e.target.value});
+              onPreviewChange(e.target.value);
+            } else if (type === 'image') {
+              onFormDataChange({...formData, image: e.target.value});
+              onPreviewChange(e.target.value);
+            } else {
               if (activeTab === 'testimonials') onFormDataChange({...formData, image: e.target.value}); 
               else onFormDataChange({...formData, avatar: e.target.value}); 
               onPreviewChange(e.target.value); 
@@ -163,11 +172,16 @@ const FormPanel = memo(({
         </label>
       )}
       {preview && (
-        <div className={`mt-3 relative rounded-xl overflow-hidden border border-white/10 ${type === 'avatar' ? 'w-24 h-24 sm:w-32 sm:h-32' : 'w-full h-36 sm:h-48'}`}>
-          <img src={preview} alt="Preview" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <div className={`mt-3 relative rounded-xl overflow-hidden border border-white/10 ${type === 'avatar' ? 'w-24 h-24 sm:w-32 sm:h-32' : activeTab === 'partners' ? 'w-full h-24 sm:h-32' : 'w-full h-36 sm:h-48'}`}>
+          <img src={preview} alt="Preview" className={`w-full h-full ${activeTab === 'partners' ? 'object-contain' : 'object-cover'}`} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           <button type="button" onClick={() => { 
-            if (type === 'image') { onFormDataChange({...formData, image: ''}); onPreviewChange(''); }
-            else { 
+            if (activeTab === 'partners') {
+              onFormDataChange({...formData, logo_url: ''});
+              onPreviewChange('');
+            } else if (type === 'image') {
+              onFormDataChange({...formData, image: ''});
+              onPreviewChange('');
+            } else {
               if (activeTab === 'testimonials') onFormDataChange({...formData, image: ''}); 
               else onFormDataChange({...formData, avatar: ''}); 
               onPreviewChange(''); 
@@ -260,7 +274,7 @@ const FormPanel = memo(({
                         className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white focus:border-primary/50 focus:outline-none" required />
                     </div>
                   )}
-                  {activeTab !== 'testimonials' && activeTab !== 'team_members' && (
+                  {activeTab !== 'testimonials' && activeTab !== 'team_members' && activeTab !== 'partners' && (
                     <div className="col-span-1 sm:col-span-2">
                       <label className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold mb-2 block">Icon Profile</label>
                       <div className="grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-10 gap-1.5 sm:gap-2 max-h-48 sm:max-h-64 overflow-y-auto p-2 bg-black/20 rounded-xl border border-white/5">
@@ -296,6 +310,7 @@ const FormPanel = memo(({
 
                 {(activeTab === 'projects' || activeTab === 'team_members') && renderImageUpload('image', 'Visual Interface (Image)', imagePreview, imageUploadMode, onImageModeChange, onImagePreviewChange)}
                 {activeTab === 'testimonials' && renderImageUpload('avatar', 'Visual Hash (Avatar)', avatarPreview, avatarUploadMode, onAvatarModeChange, onAvatarPreviewChange)}
+                {activeTab === 'partners' && renderImageUpload('image', 'Company Logo (URL or Upload)', imagePreview, imageUploadMode, onImageModeChange, onImagePreviewChange)}
 
                 {activeTab === 'projects' && (
                   <div>
