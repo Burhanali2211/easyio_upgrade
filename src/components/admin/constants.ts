@@ -76,7 +76,7 @@ export const getFormDefaults = (tab: Tab): Record<string, any> => {
     testimonials: { name: '', role: '', company: '', content: '', image: '' },
     team_members: { name: '', role: '', bio: '', image: '' },
     lab_experiments: { title: '', status: '', description: '', icon_type: 'atom' },
-    logic_engines: { title: '', description: '', icon_type: 'brain' },
+    logic_engines: { title: '', description: '', icon_type: 'brain', category: '', priority: 0, complexity_level: 'medium', use_case: '', features: [] },
     erp_features: { title: '', description: '', icon_type: 'database' },
     programs: { title: '', duration: '', level: '', description: '', icon_type: 'graduation-cap' },
     partners: { name: '', logo_url: '' },

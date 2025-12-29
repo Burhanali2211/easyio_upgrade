@@ -20,7 +20,7 @@ export default function TeamCTA() {
           <Users size={14} className="text-primary" />
           <span className="text-[10px] font-mono text-primary uppercase tracking-widest">Join The Force</span>
         </div>
-        <h2 className="text-xl sm:text-3xl lg:text-6xl font-black text-white mb-6 sm:mb-8 uppercase leading-tight">
+        <h2 className="text-xl sm:text-3xl lg:text-6xl font-black text-white mb-6 sm:mb-8 uppercase leading-[1.15] pb-2">
           We&apos;re always looking for <br className="hidden sm:block" /> 
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">elite talent.</span>
         </h2>

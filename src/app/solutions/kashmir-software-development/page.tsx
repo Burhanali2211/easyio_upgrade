@@ -35,7 +35,7 @@ export default function KashmirSEOPage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-mono text-[10px] uppercase tracking-widest font-bold">
                 <MapPin size={14} /> Regional HQ: Srinagar, Kashmir
               </div>
-              <h1 className="text-4xl sm:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+              <h1 className="text-4xl sm:text-7xl font-black uppercase tracking-tighter leading-[1.1] pb-2">
                 The Best Software <br />
                 <span className="text-primary">Company in Kashmir.</span>
               </h1>

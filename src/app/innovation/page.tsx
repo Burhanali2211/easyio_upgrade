@@ -39,7 +39,7 @@ export default function InnovationHubPage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent border border-accent/20 font-mono text-[10px] uppercase tracking-widest font-bold">
                 <Beaker size={14} /> The Innovation Labs
               </div>
-              <h1 className="text-4xl sm:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+              <h1 className="text-4xl sm:text-7xl font-black uppercase tracking-tighter leading-[1.1] pb-2">
                 Where Ideas <br />
                 <span className="text-accent">Become Systems.</span>
               </h1>

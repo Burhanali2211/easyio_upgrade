@@ -89,7 +89,7 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
                   <h3 className="text-base sm:text-xl lg:text-2xl font-display font-bold text-foreground mb-2 sm:mb-4 group-hover:text-accent transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4 sm:mb-8 line-clamp-3 sm:line-clamp-none">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4 sm:mb-8 line-clamp-3 sm:line-clamp-none pb-1">
                     {item.description}
                   </p>
                   

@@ -33,7 +33,7 @@ export default function FooterCTA() {
             <div className="absolute top-10 right-10 md:top-12 md:right-12">
               <ArrowUpRight className="w-8 h-8 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </div>
-            <h4 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-tight max-w-[280px] md:max-w-xs transition-colors group-hover:text-primary">
+            <h4 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-[1.15] pb-2 max-w-[280px] md:max-w-xs transition-colors group-hover:text-primary">
               Strategic Alliances & Power Partnerships
             </h4>
           </a>
@@ -46,7 +46,7 @@ export default function FooterCTA() {
             <div className="absolute top-10 right-10 md:top-12 md:right-12">
               <ArrowUpRight className="w-8 h-8 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </div>
-            <h4 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-tight max-w-[280px] md:max-w-xs transition-colors group-hover:text-primary">
+            <h4 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-[1.15] pb-2 max-w-[280px] md:max-w-xs transition-colors group-hover:text-primary">
               Deploy The Elite For Your Mission
             </h4>
           </a>

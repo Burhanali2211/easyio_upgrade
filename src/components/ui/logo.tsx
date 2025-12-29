@@ -85,7 +85,7 @@ const Logo = ({ className = "" }: { className?: string }) => {
           </div>
         </div>
         <div className="flex flex-col">
-          <span className="text-xl font-display font-black tracking-tighter text-white leading-none">
+          <span className="text-xl font-display font-black tracking-tighter text-white leading-[1.2] pb-0.5">
             {siteName.includes('IO') ? (
               <>
                 {siteName.split('IO')[0]}<span className="text-white">IO</span>
@@ -150,7 +150,7 @@ const Logo = ({ className = "" }: { className?: string }) => {
       </div>
       
       <div className="flex flex-col">
-        <span className="text-xl font-display font-black tracking-tighter text-white leading-none">
+        <span className="text-xl font-display font-black tracking-tighter text-white leading-[1.2] pb-0.5">
           {siteName.includes('IO') ? (
             <>
               {siteName.split('IO')[0]}<span className="text-white">iO</span>

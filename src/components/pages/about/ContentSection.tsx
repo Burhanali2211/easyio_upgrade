@@ -18,7 +18,7 @@ export default function ContentSection() {
           style={{ willChange: 'transform, opacity' }}
         >
           <div className="absolute -left-4 -top-4 w-24 h-24 bg-primary/10 blur-[60px] rounded-full opacity-50" />
-          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black text-white mb-6 sm:mb-8 uppercase leading-tight relative z-10">
+          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black text-white mb-6 sm:mb-8 uppercase leading-[1.15] pb-2 relative z-10">
             Zero-Latency <br />
             <span className="text-primary">Philosophy</span>
           </h2>
@@ -84,7 +84,7 @@ export default function ContentSection() {
           style={{ willChange: 'transform, opacity' }}
         >
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-accent/10 blur-[60px] rounded-full opacity-50" />
-          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black text-white mb-6 sm:mb-8 uppercase leading-tight relative z-10">
+          <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black text-white mb-6 sm:mb-8 uppercase leading-[1.15] pb-2 relative z-10">
             Aggressive <br />
             <span className="text-accent">Innovation</span>
           </h2>

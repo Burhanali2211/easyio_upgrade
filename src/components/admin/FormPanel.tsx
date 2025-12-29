@@ -218,12 +218,44 @@ const FormPanel = memo(({
                 {renderTestimonialFields()}
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  {['projects', 'home_solutions', 'innovation_hub'].includes(activeTab) && (
+                  {['projects', 'home_solutions', 'innovation_hub', 'logic_engines'].includes(activeTab) && (
                     <div>
                       <label className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold mb-2 block">Category</label>
                       <input type="text" value={formData.category || ''} onChange={(e) => onFormDataChange({...formData, category: e.target.value})}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white focus:border-primary/50 focus:outline-none" required />
+                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white focus:border-primary/50 focus:outline-none" />
                     </div>
+                  )}
+                  {activeTab === 'logic_engines' && (
+                    <>
+                      <div>
+                        <label className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold mb-2 block">Priority (0=normal, 1-3=featured)</label>
+                        <input type="number" min="0" max="3" value={formData.priority || 0} onChange={(e) => onFormDataChange({...formData, priority: parseInt(e.target.value) || 0})}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white focus:border-primary/50 focus:outline-none" />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold mb-2 block">Complexity Level</label>
+                        <select value={formData.complexity_level || 'medium'} onChange={(e) => onFormDataChange({...formData, complexity_level: e.target.value})}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white focus:border-primary/50 focus:outline-none">
+                          <option value="low">Entry</option>
+                          <option value="medium">Standard</option>
+                          <option value="high">Advanced</option>
+                          <option value="enterprise">Enterprise</option>
+                        </select>
+                      </div>
+                      <div className="col-span-1 sm:col-span-2">
+                        <label className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold mb-2 block">Use Case</label>
+                        <textarea value={formData.use_case || ''} onChange={(e) => onFormDataChange({...formData, use_case: e.target.value})}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white h-24 resize-none focus:border-primary/50 focus:outline-none" placeholder="Describe the primary use case for this engine..." />
+                      </div>
+                      <div className="col-span-1 sm:col-span-2">
+                        <label className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold mb-2 block">Features (comma-separated)</label>
+                        <input type="text" value={Array.isArray(formData.features) ? formData.features.join(', ') : (formData.features || '')} onChange={(e) => {
+                          const features = e.target.value.split(',').map(f => f.trim()).filter(f => f);
+                          onFormDataChange({...formData, features: features.length > 0 ? features : []});
+                        }}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 sm:py-3 text-base sm:text-sm text-white focus:border-primary/50 focus:outline-none" placeholder="Feature 1, Feature 2, Feature 3..." />
+                      </div>
+                    </>
                   )}
                   {activeTab === 'team_members' && (
                     <div>

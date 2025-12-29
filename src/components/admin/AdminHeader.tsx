@@ -21,7 +21,7 @@ const AdminHeader = memo(({ email, onSignOut }: AdminHeaderProps) => {
       
       <div className="flex items-center gap-3 sm:gap-4">
         <div className="hidden md:flex flex-col items-end mr-2 sm:mr-4">
-          <span className="text-white text-xs font-bold truncate max-w-[180px]">{email}</span>
+          <span className="text-white text-xs font-bold truncate max-w-[180px] pb-0.5">{email}</span>
           <span className="text-primary text-[9px] sm:text-[10px] font-mono uppercase tracking-widest">Master Administrator</span>
         </div>
         <button 

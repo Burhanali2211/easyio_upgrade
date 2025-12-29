@@ -68,10 +68,10 @@ const DataList = memo(({ data, loading, activeTab, onEdit, onDelete, onAdd }: Da
                         <User size={18} className="sm:w-5 sm:h-5" />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="text-white font-bold text-base sm:text-lg tracking-tight truncate">
+                        <h3 className="text-white font-bold text-base sm:text-lg tracking-tight truncate pb-0.5">
                           {item.name}
                         </h3>
-                        <p className="text-primary text-[10px] sm:text-xs font-mono truncate">{item.email}</p>
+                        <p className="text-primary text-[10px] sm:text-xs font-mono truncate pb-0.5">{item.email}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -128,7 +128,7 @@ const DataList = memo(({ data, loading, activeTab, onEdit, onDelete, onAdd }: Da
                     <span className="text-primary font-mono text-[8px] sm:text-[9px] uppercase tracking-widest font-bold bg-primary/5 px-2 py-0.5 rounded-full inline-block">
                       {item.category || item.status || item.role || 'CORE HUB'}
                     </span>
-                    <h3 className="text-white font-bold text-base sm:text-lg mt-1 tracking-tight truncate">
+                    <h3 className="text-white font-bold text-base sm:text-lg mt-1 tracking-tight truncate pb-0.5">
                       {item.title || item.name}
                     </h3>
                   </div>

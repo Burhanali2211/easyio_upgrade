@@ -125,7 +125,7 @@ export default function MobileNav({ isOpen, setIsOpen, socialLinks }: MobileNavP
                       <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-30 transition-opacity">
                         <Sparkles size={40} className="text-primary" />
                       </div>
-                      <h4 className="text-lg font-bold text-white mb-1 leading-tight">Start Project</h4>
+                      <h4 className="text-lg font-bold text-white mb-1 leading-[1.2] pb-0.5">Start Project</h4>
                       <p className="text-xs text-white/50 mb-4 leading-relaxed">Ready to transform your business infrastructure?</p>
                       <Link 
                         href="/contact"

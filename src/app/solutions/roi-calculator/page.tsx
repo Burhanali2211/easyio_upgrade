@@ -53,7 +53,7 @@ export default function ROICalculatorPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 font-mono text-[10px] uppercase tracking-widest font-bold">
               <Calculator size={14} /> Business ROI Calculator
             </div>
-            <h1 className="text-4xl sm:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+            <h1 className="text-4xl sm:text-7xl font-black uppercase tracking-tighter leading-[1.1] pb-2">
               Calculate Your <br />
               <span className="text-primary text-outline-sm">Efficiency Gain.</span>
             </h1>

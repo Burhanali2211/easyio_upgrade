@@ -95,7 +95,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
                     Rev_01.25
                   </span>
                 </div>
-                <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
+                <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tighter leading-[1.1] pb-2">
                   {project.title.split(' ').map((word, i) => (
                     <React.Fragment key={i}>
                       {i % 2 === 1 ? <span className="text-primary">{word}</span> : word}{' '}

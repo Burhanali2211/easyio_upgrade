@@ -17,7 +17,7 @@ export default function NetworkStatsWidget({ networkStats }: NetworkStatsWidgetP
         <p className="text-[9px] text-muted-foreground uppercase tracking-[0.2em] font-mono font-bold">Network</p>
         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
       </div>
-      <p className="text-[11px] font-bold text-foreground uppercase tracking-tight mb-4 leading-none">Global Nodes Active</p>
+      <p className="text-[11px] font-bold text-foreground uppercase tracking-tight mb-4 leading-[1.2] pb-0.5">Global Nodes Active</p>
       <div className="flex -space-x-2">
         {networkStats.isLoading ? (
           <>

@@ -68,7 +68,7 @@ export default function TeamMemberCard({ member, index }: TeamMemberCardProps) {
       <div className="relative z-10">
         <h3 className="text-lg sm:text-2xl font-bold text-white mb-0.5 sm:mb-1 group-hover:text-primary transition-colors">{member.name}</h3>
         <p className="text-primary/60 font-mono text-[8px] sm:text-[10px] uppercase tracking-widest mb-2 sm:mb-4 font-bold">{member.role}</p>
-        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-3 sm:line-clamp-none">
+        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-3 sm:line-clamp-none pb-1">
           {member.bio}
         </p>
         

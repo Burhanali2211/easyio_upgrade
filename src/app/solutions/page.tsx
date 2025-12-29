@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Navigation from "@/components/sections/navigation";
 import Footer from "@/components/sections/footer";
 import {
@@ -11,6 +12,8 @@ import {
 
 export default function SolutionsPage() {
   const { engines, loading, error } = useEngines();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -24,7 +27,17 @@ export default function SolutionsPage() {
         
         <div className="container pt-8 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 relative z-10">
           <SolutionsHero />
-          <EnginesGrid engines={engines} loading={loading} error={error} />
+          
+          <EnginesGrid 
+            engines={engines} 
+            loading={loading} 
+            error={error}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+          />
+          
           <CustomDevelopmentCTA />
         </div>
         
