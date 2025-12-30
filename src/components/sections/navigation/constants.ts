@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 
 export const menuItems = [
-  { name: "Home", href: "/", icon: LayoutGrid, color: "text-white" },
+  { name: "Home", href: "/", icon: LayoutGrid, color: "text-primary" },
   { name: "About", href: "/about", icon: Cpu, color: "text-cyan-400" },
   { name: "Projects", href: "/ourwork", icon: Briefcase, color: "text-emerald-400" },
   { name: "ERP", href: "/erp", icon: Database, color: "text-blue-400" },

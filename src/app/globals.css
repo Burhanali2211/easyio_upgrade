@@ -7,33 +7,33 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-background: #020205;
-  --color-foreground: #ffffff;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 
-  --color-card: #08080f;
-  --color-card-foreground: #ffffff;
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 
-  --color-popover: #08080f;
-  --color-popover-foreground: #ffffff;
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
 
-  --color-primary: #3b82f6;
-  --color-primary-foreground: #ffffff;
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
 
-  --color-secondary: #1e1b4b;
-  --color-secondary-foreground: #ffffff;
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
 
-  --color-muted: #111116;
-  --color-muted-foreground: #94a3b8;
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
 
-  --color-accent: #6366f1;
-  --color-accent-foreground: #ffffff;
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #fafafa;
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
-  --color-border: #1e293b;
-  --color-input: #1e293b;
-  --color-ring: #3b82f6;
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
   --color-chart-1: #3b82f6;
   --color-chart-2: #8b5cf6;
@@ -41,14 +41,14 @@
   --color-chart-4: #f59e0b;
   --color-chart-5: #10b981;
 
-  --color-sidebar: #020205;
-  --color-sidebar-foreground: #94a3b8;
-  --color-sidebar-primary: #3b82f6;
-  --color-sidebar-primary-foreground: #ffffff;
-  --color-sidebar-accent: #08080f;
-  --color-sidebar-accent-foreground: #ffffff;
-  --color-sidebar-border: #1e293b;
-  --color-sidebar-ring: #3b82f6;
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 
   --font-sans: "Inter", sans-serif;
   --font-display: "Syne", sans-serif;
@@ -85,6 +85,14 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
+    border-color: var(--border);
+  }
+  
+  .dark *,
+  .dark ::after,
+  .dark ::before,
+  .dark ::backdrop,
+  .dark ::file-selector-button {
     border-color: #1e293b;
   }
 }
@@ -159,6 +167,8 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--background);
+    color: var(--foreground);
   }
   
   @media (prefers-reduced-motion: reduce) {
@@ -170,15 +180,17 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
+    background-color: var(--background);
     background-image: 
-      linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
+      linear-gradient(to right, rgba(203, 213, 225, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(203, 213, 225, 0.15) 1px, transparent 1px);
     background-size: 80px 80px;
     will-change: scroll-position;
   }
 
   .dark body,
   body:is(.dark *) {
+    background-color: var(--background);
     background-image: 
       linear-gradient(to right, rgba(30, 41, 59, 0.15) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(30, 41, 59, 0.15) 1px, transparent 1px);
@@ -400,6 +412,68 @@
     }
   }
 
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes growBar {
+    from {
+      height: 0%;
+    }
+    to {
+      height: var(--target-height, 50%);
+    }
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes drawDonut {
+    to {
+      stroke-dashoffset: var(--donut-offset, 0);
+    }
+  }
+
+  @keyframes drawDonutSegment {
+    to {
+      stroke-dashoffset: var(--target-offset, 0);
+    }
+  }
+
+  @keyframes growProgress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: var(--target-width, 50%);
+    }
+  }
+
+  @keyframes drawSparkline {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes popIn {
+    from {
+      r: 0;
+    }
+    to {
+      r: 1.5;
+    }
+  }
+
   .animate-fadeIn {
     animation: fadeIn 0.5s ease-out forwards;
     opacity: 0;
@@ -442,11 +516,31 @@
       }
     }
 
+    @keyframes marquee-mobile {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
     .animate-marquee {
       animation: marquee 25s linear infinite;
     }
 
-    .animate-marquee:hover {
+    .animate-marquee-mobile {
+      animation: marquee-mobile 30s linear infinite;
+    }
+
+    @media (min-width: 640px) {
+      .animate-marquee-mobile {
+        animation: marquee-mobile 40s linear infinite;
+      }
+    }
+
+    .animate-marquee:hover,
+    .animate-marquee-mobile:hover {
       animation-play-state: paused;
     }
 
@@ -491,10 +585,6 @@
       background-color: var(--background);
       contain: layout style;
       transform: translateZ(0);
-    }
-
-    .dark main > section:not(:first-child) {
-      background-color: #020202;
     }
 
     /* Fixed sidebar - ensure it never scrolls */

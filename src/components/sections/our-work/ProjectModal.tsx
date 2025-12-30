@@ -76,7 +76,7 @@ const ProjectModal = memo(({ project, onClose }: ProjectModalProps) => {
                 <Icon size={32} className="sm:w-12 sm:h-12 text-muted-foreground dark:text-white/20" />
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-card dark:from-[#050507] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent dark:from-card dark:from-[#050507] dark:via-transparent dark:to-transparent" />
             
             <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6">
               <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-mono text-[9px] sm:text-[10px] uppercase tracking-wider mb-2 sm:mb-3">

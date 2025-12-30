@@ -3,14 +3,6 @@ import { Client } from 'pg';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { CACHE_TAGS } from '@/lib/cache/config';
 
-// CORS headers helper
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Max-Age': '86400',
-};
-
 // Direct PostgreSQL connection using pooler (works for simple queries)
 const getDbClient = async () => {
   const databaseUrl = process.env.DATABASE_URL;
@@ -28,11 +20,11 @@ const getDbClient = async () => {
   });
 
   try {
-      await client.connect();
-    } catch (connectError: unknown) {
-      const error = connectError as Error;
-      throw new Error(`Failed to connect to database: ${error.message}`);
-    }
+    await client.connect();
+  } catch (connectError: unknown) {
+    const error = connectError as Error;
+    throw new Error(`Failed to connect to database: ${error.message}`);
+  }
   
   return client;
 };
@@ -49,7 +41,6 @@ async function ensureTableExists(client: Client) {
   `);
   
   if (!tableCheck.rows[0]?.exists) {
-    
     // Create table
     await client.query(`
       CREATE TABLE IF NOT EXISTS website_settings (
@@ -100,6 +91,14 @@ async function ensureTableExists(client: Client) {
   }
 }
 
+// CORS headers helper
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  'Access-Control-Max-Age': '86400',
+};
+
 // Handle CORS preflight requests
 export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders });
@@ -137,7 +136,7 @@ export async function GET() {
       }
     );
   } catch (error: any) {
-    console.error('Error fetching website settings:', error);
+    console.error('Error fetching system settings:', error);
     return NextResponse.json(
       { 
         error: error.message || 'Internal server error',
@@ -258,7 +257,7 @@ export async function POST(request: NextRequest) {
       }
     );
   } catch (error: any) {
-    console.error('Error in POST website settings:', error);
+    console.error('Error in POST system settings:', error);
     return NextResponse.json(
       { 
         error: error.message || 'Internal server error',
@@ -275,3 +274,4 @@ export async function POST(request: NextRequest) {
     }
   }
 }
+

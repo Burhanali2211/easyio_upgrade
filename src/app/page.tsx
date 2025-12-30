@@ -117,7 +117,7 @@ export default async function Home() {
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">
       <Navigation />
       
-      <main className="lg:pl-[288px] overflow-hidden pt-16 lg:pt-0 relative z-10 bg-background dark:bg-[#020202]">
+      <main className="lg:pl-[288px] overflow-hidden pt-16 lg:pt-0 relative z-10 bg-background">
         <HeroSection />
         
         <LazySection rootMargin="200px">

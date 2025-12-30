@@ -48,7 +48,7 @@ export default function TestimonialsPage() {
             <span className="text-emerald-500 font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 block">
               Intel Center
             </span>
-            <h1 className="text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-black uppercase">
+            <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-black uppercase">
               Client <br /><span className="text-emerald-500">Validation.</span>
             </h1>
             <p className="max-w-2xl text-muted-foreground text-base sm:text-xl leading-relaxed">
@@ -68,7 +68,7 @@ export default function TestimonialsPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  className="relative p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-[3rem] bg-white/[0.02] border border-white/5 hover:border-emerald-500/20 transition-all group"
+                  className="relative p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-[3rem] bg-card dark:bg-white/[0.02] border border-border dark:border-white/5 hover:border-emerald-500/20 transition-all group"
                 >
                   <Quote className="absolute top-4 right-6 sm:top-8 sm:right-10 text-emerald-500/10 group-hover:text-emerald-500/20 transition-colors" size={50} />
                   
@@ -79,12 +79,12 @@ export default function TestimonialsPage() {
                       ))}
                     </div>
                     
-                    <p className="text-lg sm:text-xl lg:text-2xl text-white font-medium leading-relaxed mb-8 sm:mb-10 italic">
+                    <p className="text-lg sm:text-xl lg:text-2xl text-foreground dark:text-white font-medium leading-relaxed mb-8 sm:mb-10 italic">
                       "{t.content}"
                     </p>
                     
-                      <div className="flex items-center gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-white/5">
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/5 overflow-hidden ring-2 ring-emerald-500/20 ring-offset-2 ring-offset-[#020202]">
+                      <div className="flex items-center gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-border dark:border-white/5">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-muted dark:bg-white/5 overflow-hidden ring-2 ring-emerald-500/20 ring-offset-2 ring-offset-background dark:ring-offset-[#020202]">
                           <img 
                             src={t.image || `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`} 
                             alt={t.name} 
@@ -92,7 +92,7 @@ export default function TestimonialsPage() {
                           />
                         </div>
                       <div>
-                        <h4 className="text-base sm:text-lg font-bold text-white">{t.name}</h4>
+                        <h4 className="text-base sm:text-lg font-bold text-foreground dark:text-white">{t.name}</h4>
                         <p className="text-xs sm:text-sm text-emerald-500/60 font-mono uppercase tracking-widest">{t.role} @ {t.company}</p>
                       </div>
                     </div>
@@ -105,10 +105,10 @@ export default function TestimonialsPage() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="mt-16 sm:mt-24 lg:mt-32 p-8 sm:p-12 lg:p-20 rounded-2xl sm:rounded-[3.5rem] bg-gradient-to-br from-[#050505] to-[#080808] border border-white/5 text-center"
+            className="mt-16 sm:mt-24 lg:mt-32 p-8 sm:p-12 lg:p-20 rounded-2xl sm:rounded-[3.5rem] bg-card dark:bg-gradient-to-br dark:from-[#050505] dark:to-[#080808] border border-border dark:border-white/5 text-center"
           >
             <MessageSquare className="mx-auto mb-6 sm:mb-8 text-emerald-500" size={36} />
-            <h2 className="text-xl sm:text-3xl lg:text-5xl font-black text-white mb-4 sm:mb-6 uppercase">Ready to be our next success story?</h2>
+            <h2 className="text-xl sm:text-3xl lg:text-5xl font-black text-foreground dark:text-white mb-4 sm:mb-6 uppercase">Ready to be our next success story?</h2>
             <p className="text-base sm:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
               Join the ranks of elite enterprises that run on Easyio logic.
             </p>

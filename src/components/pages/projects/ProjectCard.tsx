@@ -30,8 +30,8 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
     >
       <div className={`
         relative rounded-xl sm:rounded-2xl overflow-hidden
-        bg-white/[0.04] border border-white/10 
-        hover:border-primary/40 hover:bg-white/[0.06]
+        bg-card dark:bg-white/[0.04] border border-border dark:border-white/10 
+        hover:border-primary/40 dark:hover:bg-white/[0.06]
         transition-all duration-500 flex flex-col h-full w-full
         ${isFeatured ? 'ring-1 ring-primary/20' : ''}
       `}>
@@ -64,12 +64,12 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
           )}
           
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent dark:from-background dark:via-background/40 dark:to-transparent opacity-80 dark:opacity-80 group-hover:opacity-60 dark:group-hover:opacity-60 transition-opacity" />
           
           {/* Icon Badge */}
-          <div className="absolute top-4 right-4 z-10">
-            <div className="w-12 h-12 rounded-xl bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Icon size={20} className="text-primary" strokeWidth={2} />
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Icon size={18} className="sm:w-5 sm:h-5 text-primary" strokeWidth={2} />
             </div>
           </div>
 
@@ -77,44 +77,44 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
             <Link
               href={project.live_url || `/ourwork/${project.id}`}
-              className="px-6 py-3 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-full flex items-center gap-2 transform group-hover:scale-105 transition-transform shadow-lg"
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-primary text-primary-foreground font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-full flex items-center gap-2 transform group-hover:scale-105 transition-transform shadow-lg"
             >
               View Project
-              <ArrowRight size={14} />
+              <ArrowRight size={12} className="sm:w-[14px] sm:h-[14px]" />
             </Link>
           </div>
         </div>
 
         {/* Content Section */}
-        <div className="flex flex-col flex-grow p-5 sm:p-6 min-h-0">
+        <div className="flex flex-col flex-grow p-4 sm:p-5 lg:p-6 min-h-0">
           {/* Category & Meta */}
-          <div className="flex items-center justify-between mb-3 flex-shrink-0">
-            <span className="px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] font-mono font-bold uppercase tracking-wider">
+          <div className="flex items-center justify-between mb-2 sm:mb-3 flex-shrink-0">
+            <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider">
               {project.category}
             </span>
             {project.completion_date && (
-              <div className="flex items-center gap-1.5 text-white/40 text-[9px] font-mono uppercase tracking-wider">
-                <Calendar size={10} />
+              <div className="flex items-center gap-1.5 text-muted-foreground dark:text-white/40 text-[8px] sm:text-[9px] font-mono uppercase tracking-wider">
+                <Calendar size={9} className="sm:w-[10px] sm:h-[10px]" />
                 {new Date(project.completion_date).getFullYear()}
               </div>
             )}
           </div>
 
           {/* Title */}
-          <h3 className="font-display font-bold text-white mb-2 group-hover:text-primary transition-colors flex-shrink-0 line-clamp-2 text-lg sm:text-xl">
+          <h3 className="font-display font-bold text-foreground dark:text-white mb-2 group-hover:text-primary transition-colors flex-shrink-0 line-clamp-2 text-base sm:text-lg lg:text-xl">
             {project.title}
           </h3>
 
           {/* Description */}
-          <p className="text-white/70 leading-relaxed mb-3 flex-grow min-h-0 line-clamp-3 text-xs sm:text-sm">
+          <p className="text-muted-foreground dark:text-white/70 leading-relaxed mb-2 sm:mb-3 flex-grow min-h-0 line-clamp-3 text-xs sm:text-sm">
             {project.description}
           </p>
 
           {/* Client Info */}
           {project.client_name && (
-            <div className="flex items-center gap-2 mb-3 p-2 rounded-lg bg-white/[0.02] border border-white/5 flex-shrink-0">
-              <Building2 size={12} className="text-primary/60" />
-              <span className="text-[10px] text-white/50 font-mono uppercase tracking-wider truncate">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3 p-2 rounded-lg bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5 flex-shrink-0">
+              <Building2 size={11} className="sm:w-3 sm:h-3 text-primary/60" />
+              <span className="text-[9px] sm:text-[10px] text-muted-foreground dark:text-white/50 font-mono uppercase tracking-wider truncate">
                 {project.client_name}
               </span>
             </div>
@@ -122,24 +122,24 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
 
           {/* Tech Stack */}
           {project.tech_stack && project.tech_stack.length > 0 && (
-            <div className="mb-3 flex-shrink-0">
+            <div className="mb-2 sm:mb-3 flex-shrink-0">
               <div className="flex items-center gap-1.5 mb-1.5">
-                <Code2 size={10} className="text-primary/60" />
-                <span className="text-[8px] font-mono font-bold text-primary/60 uppercase tracking-wider">
+                <Code2 size={9} className="sm:w-[10px] sm:h-[10px] text-primary/60" />
+                <span className="text-[7px] sm:text-[8px] font-mono font-bold text-primary/60 uppercase tracking-wider">
                   Tech
                 </span>
               </div>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1 sm:gap-1.5">
                 {project.tech_stack.slice(0, 3).map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-0.5 rounded-lg bg-white/[0.02] border border-white/5 text-[9px] font-mono text-white/50"
+                    className="px-1.5 sm:px-2 py-0.5 rounded-lg bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5 text-[8px] sm:text-[9px] font-mono text-muted-foreground dark:text-white/50"
                   >
                     {tech}
                   </span>
                 ))}
                 {project.tech_stack.length > 3 && (
-                  <span className="px-2 py-0.5 rounded-lg bg-white/[0.02] border border-white/5 text-[9px] font-mono text-white/30">
+                  <span className="px-1.5 sm:px-2 py-0.5 rounded-lg bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5 text-[8px] sm:text-[9px] font-mono text-muted-foreground dark:text-white/30">
                     +{project.tech_stack.length - 3}
                   </span>
                 )}
@@ -149,11 +149,11 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
 
           {/* Tags */}
           {project.tags && project.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-3 flex-shrink-0">
+            <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3 flex-shrink-0">
               {project.tags.slice(0, 2).map((tag, idx) => (
                 <span
                   key={idx}
-                  className="px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[8px] font-mono text-primary uppercase tracking-wider"
+                  className="px-1.5 sm:px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[7px] sm:text-[8px] font-mono text-primary uppercase tracking-wider"
                 >
                   {tag}
                 </span>
@@ -162,22 +162,22 @@ const ProjectCard = memo(({ project, index }: ProjectCardProps) => {
           )}
 
           {/* Action Links */}
-          <div className="flex items-center gap-3 mt-auto pt-3 border-t border-white/5 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 mt-auto pt-2 sm:pt-3 border-t border-border dark:border-white/5 flex-shrink-0">
             <Link
               href={`/ourwork/${project.id}`}
-              className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-xs font-mono uppercase tracking-wider group/link"
+              className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground dark:text-white/60 hover:text-primary transition-colors text-[10px] sm:text-xs font-mono uppercase tracking-wider group/link"
             >
               View Details
-              <ArrowRight size={12} className="group-hover/link:translate-x-1 transition-transform" />
+              <ArrowRight size={11} className="sm:w-3 sm:h-3 group-hover/link:translate-x-1 transition-transform" />
             </Link>
             {project.live_url && (
               <a
                 href={project.live_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-xs font-mono uppercase tracking-wider ml-auto"
+                className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground dark:text-white/60 hover:text-primary transition-colors text-[10px] sm:text-xs font-mono uppercase tracking-wider ml-auto"
               >
-                <ExternalLink size={12} />
+                <ExternalLink size={11} className="sm:w-3 sm:h-3" />
                 Live Site
               </a>
             )}

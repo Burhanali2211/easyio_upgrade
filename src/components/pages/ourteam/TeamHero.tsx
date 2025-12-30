@@ -14,7 +14,7 @@ export default function TeamHero() {
         <Users size={14} className="text-primary" />
         <span className="text-[10px] font-mono text-primary uppercase tracking-widest">Elite Force</span>
       </div>
-      <h1 className="text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tighter">
+      <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tighter">
         The <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/30">Architects.</span>
       </h1>

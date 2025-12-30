@@ -75,7 +75,7 @@ export default function EnginesGrid({
             <Loader2 className="text-primary/50" size={20} />
           </div>
         </div>
-        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Loading engines...</span>
+        <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">Loading engines...</span>
       </div>
     );
   }
@@ -94,8 +94,8 @@ export default function EnginesGrid({
   if (engines.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-          <Database size={24} className="text-white/30" strokeWidth={1.5} />
+        <div className="w-16 h-16 rounded-full bg-muted dark:bg-white/5 border border-border dark:border-white/10 flex items-center justify-center">
+          <Database size={24} className="text-muted-foreground dark:text-white/30" strokeWidth={1.5} />
         </div>
         <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">No engines available</p>
       </div>
@@ -120,7 +120,7 @@ export default function EnginesGrid({
 
       {/* Results Count */}
       {filteredEngines.length !== engines.length && (
-        <div className="mb-6 text-sm font-mono text-white/40 uppercase tracking-wider">
+        <div className="mb-6 text-sm font-mono text-muted-foreground dark:text-white/40 uppercase tracking-wider">
           Showing {filteredEngines.length} of {engines.length} engines
         </div>
       )}
@@ -128,8 +128,8 @@ export default function EnginesGrid({
       {/* No Results */}
       {filteredEngines.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-            <Database size={24} className="text-white/30" strokeWidth={1.5} />
+          <div className="w-16 h-16 rounded-full bg-muted dark:bg-white/5 border border-border dark:border-white/10 flex items-center justify-center">
+            <Database size={24} className="text-muted-foreground dark:text-white/30" strokeWidth={1.5} />
           </div>
           <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">
             No engines found matching your criteria

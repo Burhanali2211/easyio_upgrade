@@ -49,21 +49,21 @@ const SolutionCard = memo(({ solution, index, Icon, colors }: SolutionCardProps)
   return (
     <div
       style={{ animationDelay: `${index * 100}ms` }}
-      className="group relative animate-fadeIn"
+      className="group relative animate-fadeIn overflow-hidden"
     >
       {/* Base layer with border hover effect only */}
-      <div className="absolute inset-0 rounded-2xl sm:rounded-[2.5rem] border border-border dark:border-white/5 bg-card dark:bg-white/[0.01] group-hover:border-primary/30 dark:group-hover:border-white/25 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-all duration-500 ease-out" />
+      <div className="absolute inset-0 rounded-2xl sm:rounded-[2.5rem] border-2 sm:border border-border/80 dark:border-white/30 sm:border-border/60 sm:dark:border-white/10 bg-card dark:bg-white/[0.01] group-hover:border-primary/50 dark:group-hover:border-white/30 sm:group-hover:border-primary/30 sm:dark:group-hover:border-white/25 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-all duration-500 ease-out" />
       
-        <div className="relative p-6 sm:p-8 lg:p-12 flex flex-col h-full z-10">
-          <div className={`absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-[0.03] group-hover:scale-[3] transition-all duration-700 ease-out ${colors.icon} -rotate-12 group-hover:rotate-0 pointer-events-none`}>
-            <Icon size={120} />
+        <div className="relative p-6 sm:p-8 lg:p-12 flex flex-col h-full z-10 overflow-hidden">
+          <div className={`absolute top-0 right-0 p-4 sm:p-6 opacity-0 group-hover:opacity-[0.03] group-hover:scale-[1.5] sm:group-hover:scale-[1.8] transition-all duration-700 ease-out ${colors.icon} -rotate-12 group-hover:rotate-0 pointer-events-none origin-top-right`}>
+            <Icon size={80} className="sm:w-24 sm:h-24 lg:w-28 lg:h-28" />
           </div>
           
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-0 mb-6 sm:mb-12">
           <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-[2rem] bg-muted dark:bg-white/5 border border-border dark:border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
             <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${colors.icon}`} />
           </div>
-          <span className="text-[9px] sm:text-[10px] font-mono font-bold text-muted-foreground dark:text-white/30 uppercase tracking-[0.2em] sm:tracking-[0.3em] bg-muted dark:bg-white/[0.02] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border dark:border-white/5 w-fit">
+          <span className="text-[9px] sm:text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-[0.2em] sm:tracking-[0.3em] bg-muted px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border w-fit">
             {solution.category}
           </span>
         </div>
@@ -80,7 +80,7 @@ const SolutionCard = memo(({ solution, index, Icon, colors }: SolutionCardProps)
           {(solution.features || []).map((feature) => (
             <div key={feature} className="flex items-center gap-1.5 sm:gap-2 py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-lg sm:rounded-xl bg-muted dark:bg-white/[0.02] border border-border dark:border-white/5 whitespace-nowrap">
               <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary flex-shrink-0" />
-              <span className="text-[8px] sm:text-[9px] font-bold text-foreground/70 dark:text-white/70 uppercase tracking-tight">{feature}</span>
+              <span className="text-[8px] sm:text-[9px] font-bold text-foreground/80 uppercase tracking-tight">{feature}</span>
             </div>
           ))}
         </div>
@@ -124,7 +124,7 @@ const SolutionsOverview = memo(({ solutions = [] }: SolutionsProps) => {
   };
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 bg-background dark:bg-[#020202] relative overflow-hidden z-10" data-section="solutions">
+    <section className="py-16 sm:py-24 lg:py-32 bg-background relative overflow-hidden z-10" data-section="solutions">
       <div className="container relative z-10">
         <div className="flex flex-col mb-12 sm:mb-16 lg:mb-24">
           <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 animate-fadeIn">
@@ -135,7 +135,7 @@ const SolutionsOverview = memo(({ solutions = [] }: SolutionsProps) => {
           </div>
           
           <h2 className="text-[clamp(2rem,10vw,3.5rem)] sm:text-5xl lg:text-8xl font-display font-bold text-foreground tracking-tighter max-w-4xl animate-fadeIn">
-            Universal <span className="text-foreground/20 dark:text-white/20">Business</span> <br className="hidden sm:block" />
+            Universal <span className="text-foreground/40 dark:text-white/20">Business</span> <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/40 dark:from-white dark:to-white/40">Infrastructure.</span>
           </h2>
         </div>

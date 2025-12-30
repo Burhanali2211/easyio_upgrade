@@ -33,7 +33,7 @@ const ProjectCard = memo(({ project, onClick }: ProjectCardProps) => {
             <Icon size={40} className="text-muted-foreground dark:text-white/20" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent dark:from-background dark:via-background/20 dark:to-transparent opacity-60 dark:opacity-60 group-hover:opacity-40 dark:group-hover:opacity-40 transition-opacity" />
         
         <div className="absolute top-4 left-4 sm:top-6 sm:left-6 p-2 sm:p-3 rounded-lg sm:rounded-xl glass-effect text-primary">
           <Icon size={20} className="sm:w-6 sm:h-6" />

@@ -46,13 +46,13 @@ const Footer = () => {
       links: [
     { name: "LinkedIn", href: "https://linkedin.com", external: true, icon: <Linkedin size={14} className="sm:w-4 sm:h-4 text-[#0A66C2]" /> },
     { name: "Twitter", href: "https://twitter.com", external: true, icon: <Twitter size={14} className="sm:w-4 sm:h-4 text-[#1DA1F2]" /> },
-    { name: "GitHub", href: "https://github.com", external: true, icon: <Github size={14} className="sm:w-4 sm:h-4 text-white" /> },
+    { name: "GitHub", href: "https://github.com", external: true, icon: <Github size={14} className="sm:w-4 sm:h-4 text-foreground" /> },
       ]
     }
   ];
 
   return (
-    <footer className="relative w-full bg-background dark:bg-[#020202] border-t border-border dark:border-white/5 pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-12 z-30">
+    <footer className="relative w-full bg-background border-t border-border pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-12 z-30">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-12 mb-12 sm:mb-16 lg:mb-20">
           <div className="col-span-2 md:col-span-1 flex flex-col gap-4 sm:gap-6">

@@ -53,27 +53,27 @@ const features = [
 
 export default function LearnDesign() {
   return (
-    <section className="relative w-full bg-[#050508] text-white pt-[120px] pb-[120px] z-10">
+    <section className="relative w-full bg-muted dark:bg-[#050508] text-foreground dark:text-white pt-[120px] pb-[120px] z-10">
       <div className="container mx-auto px-8 max-w-[1440px]">
         {/* Header Section */}
         <div className="mb-[64px] max-w-[1000px]">
           <div className="mb-4">
-            <h2 className="text-[16px] font-bold uppercase tracking-wider text-white">
+            <h2 className="text-[16px] font-bold uppercase tracking-wider text-foreground dark:text-white">
               Learn Design
             </h2>
-            <div className="h-[2px] w-12 bg-[#6017ff] mt-4" />
+            <div className="h-[2px] w-12 bg-primary dark:bg-[#6017ff] mt-4" />
           </div>
-          <p className="text-[#a1a1a1] text-[18px] lg:text-[20px] leading-[1.6] mt-8 font-sans max-w-[850px]">
+          <p className="text-muted-foreground dark:text-[#a1a1a1] text-[18px] lg:text-[20px] leading-[1.6] mt-8 font-sans max-w-[850px]">
             Our video tutorials cover UX/UI design principles, web and graphic design, as well as advanced topics like prototyping and usability testing.
           </p>
         </div>
 
         {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#1a1a1a]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border dark:border-[#1a1a1a]">
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="flex flex-col p-12 border-r border-b border-[#1a1a1a] transition-all duration-300 hover:bg-[#111116] group min-h-[300px]"
+              className="flex flex-col p-12 border-r border-b border-border dark:border-[#1a1a1a] transition-all duration-300 hover:bg-muted/50 dark:hover:bg-[#111116] group min-h-[300px]"
             >
               <div className="mb-auto">
                 <div className="relative w-10 h-10 mb-10">
@@ -82,16 +82,16 @@ export default function LearnDesign() {
                     alt={feature.title}
                     width={40}
                     height={40}
-                    className="object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-300"
+                    className="object-contain filter brightness-75 dark:brightness-75 group-hover:brightness-100 transition-all duration-300"
                   />
                 </div>
               </div>
 
               <div>
-                <h3 className="font-display text-[22px] font-bold mb-3 text-white">
+                <h3 className="font-display text-[22px] font-bold mb-3 text-foreground dark:text-white">
                   {feature.title}
                 </h3>
-                <p className="font-sans text-[15px] text-[#6a6a6e] group-hover:text-[#a1a1a1] transition-colors">
+                <p className="font-sans text-[15px] text-muted-foreground dark:text-[#6a6a6e] group-hover:text-foreground/80 dark:group-hover:text-[#a1a1a1] transition-colors">
                   {feature.description}
                 </p>
               </div>

@@ -43,7 +43,7 @@ const HeroSection = memo(() => {
   return (
     <section ref={heroRef} className="relative w-full min-h-screen overflow-hidden">
       {/* Fixed Background Layer - Using transform for better performance */}
-      <div className={`fixed inset-0 w-full h-screen bg-background dark:bg-[#020202] pointer-events-none z-0 hero-background transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transform: 'translateZ(0)', willChange: 'opacity' }}>
+      <div className={`fixed inset-0 w-full h-screen bg-background pointer-events-none z-0 hero-background transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transform: 'translateZ(0)', willChange: 'opacity' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-primary/8 blur-[100px] rounded-full" />
           <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-accent/5 blur-[80px] rounded-full" />
@@ -195,7 +195,7 @@ const HeroSection = memo(() => {
               />
             <button 
               onClick={() => setShowVideo(false)}
-              className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              className="absolute top-4 right-4 w-12 h-12 rounded-full bg-background/80 dark:bg-white/10 hover:bg-background/90 dark:hover:bg-white/20 flex items-center justify-center text-foreground dark:text-white transition-colors backdrop-blur-sm"
             >
               <X size={24} />
             </button>

@@ -18,7 +18,7 @@ const Collaborators = memo(({ partners = [] }: CollaboratorsProps) => {
   const duplicatedPartners = useMemo(() => [...partners, ...partners], [partners]);
 
   return (
-    <section className="relative w-full bg-background dark:bg-[#020202] py-10 sm:py-16 overflow-hidden border-y border-border dark:border-white/5 z-10">
+    <section className="relative w-full bg-background py-10 sm:py-16 overflow-hidden border-y border-border z-10">
       <div className="container mx-auto relative z-10 mb-6 sm:mb-8">
         <div className="text-center lg:text-left">
           <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-primary mb-2 block">
@@ -31,15 +31,15 @@ const Collaborators = memo(({ partners = [] }: CollaboratorsProps) => {
       </div>
 
       <div className="relative w-full overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-background dark:from-[#020202] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-background dark:from-[#020202] to-transparent z-10 pointer-events-none" />
         
-        <div className="flex animate-marquee whitespace-nowrap">
+        <div className="flex animate-marquee-mobile sm:animate-marquee whitespace-nowrap will-change-transform">
           {duplicatedPartners.map((partner, index) => {
             return (
               <div 
                 key={`${partner.id}-${index}`}
-                className="flex items-center justify-center flex-shrink-0 mx-6 sm:mx-10 opacity-60 hover:opacity-100 transition-opacity"
+                className="flex items-center justify-center flex-shrink-0 mx-4 sm:mx-10 opacity-60 hover:opacity-100 transition-opacity"
               >
                 {partner.logo_url ? (
                   <Image

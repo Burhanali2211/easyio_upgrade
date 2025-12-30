@@ -56,8 +56,8 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
     >
       <div className={`
         relative p-6 sm:p-8 lg:p-10 rounded-xl sm:rounded-[2rem] 
-        bg-white/[0.04] border border-white/10 
-        hover:border-primary/40 hover:bg-white/[0.06]
+        bg-card dark:bg-white/[0.04] border border-border dark:border-white/10 
+        hover:border-primary/40 dark:hover:bg-white/[0.06]
         transition-all duration-500 flex flex-col h-full overflow-hidden
         ${isFeatured ? 'ring-1 ring-primary/20' : ''}
       `}>
@@ -111,7 +111,7 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
 
         {/* Title */}
         <h3 className={`
-          relative z-10 font-display font-bold text-white mb-2 sm:mb-3 
+          relative z-10 font-display font-bold text-foreground dark:text-white mb-2 sm:mb-3 
           group-hover:text-primary transition-colors
           ${cardSize === 'large' ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-lg sm:text-xl'}
         `}>
@@ -120,7 +120,7 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
 
         {/* Description */}
         <p className={`
-          relative z-10 text-white/70 leading-relaxed mb-4 sm:mb-6 flex-grow
+          relative z-10 text-muted-foreground dark:text-white/70 leading-relaxed mb-4 sm:mb-6 flex-grow
           ${cardSize === 'large' ? 'text-base sm:text-lg' : 'text-sm sm:text-base'}
         `}>
           {engine.description}
@@ -128,14 +128,14 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
 
         {/* Use Case */}
         {engine.use_case && cardSize === 'large' && (
-          <div className="relative z-10 mb-4 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div className="relative z-10 mb-4 p-4 rounded-xl bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5">
             <div className="flex items-center gap-2 mb-2">
               <Layers size={14} className="text-primary/60" strokeWidth={1.5} />
               <span className="text-[10px] font-mono font-bold text-primary/60 uppercase tracking-wider">
                 Use Case
               </span>
             </div>
-            <p className="text-sm text-white/60 leading-relaxed">{engine.use_case}</p>
+            <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{engine.use_case}</p>
           </div>
         )}
 
@@ -146,15 +146,15 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
               {engine.features.slice(0, cardSize === 'large' ? 6 : 3).map((feature, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.02] border border-white/5"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5"
                 >
                   <CheckCircle2 size={10} className="text-primary/60" strokeWidth={2} />
-                  <span className="text-[10px] font-mono text-white/50">{feature}</span>
+                  <span className="text-[10px] font-mono text-muted-foreground dark:text-white/50">{feature}</span>
                 </div>
               ))}
               {engine.features.length > (cardSize === 'large' ? 6 : 3) && (
-                <div className="px-2.5 py-1 rounded-lg bg-white/[0.02] border border-white/5">
-                  <span className="text-[10px] font-mono text-white/30">
+                <div className="px-2.5 py-1 rounded-lg bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5">
+                  <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30">
                     +{engine.features.length - (cardSize === 'large' ? 6 : 3)} more
                   </span>
                 </div>
@@ -166,7 +166,7 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
         {/* CTA Link */}
         <Link 
           href={`/contact?type=enterprise&engine=${encodeURIComponent(engine.title)}`}
-          className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-white/60 group-hover:text-primary transition-colors text-[10px] sm:text-xs uppercase tracking-widest font-mono font-bold mt-auto group/link"
+          className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-muted-foreground dark:text-white/60 group-hover:text-primary transition-colors text-[10px] sm:text-xs uppercase tracking-widest font-mono font-bold mt-auto group/link"
         >
           Access Engine Specs
           <ChevronRight size={12} className="sm:w-[14px] sm:h-[14px] group-hover/link:translate-x-1 transition-transform" />

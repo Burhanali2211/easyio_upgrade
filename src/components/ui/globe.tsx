@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, memo } from "react";
+import { useTheme } from "next-themes";
 import createGlobe from "cobe";
 
 const Globe = memo(({ className }: { className?: string }) => {
@@ -12,6 +13,8 @@ const Globe = memo(({ className }: { className?: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showGlobe, setShowGlobe] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme, resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark' || theme === 'dark';
 
   // Calculate optimal settings based on device capability
   const getOptimalSettings = () => {
@@ -70,19 +73,32 @@ const Globe = memo(({ className }: { className?: string }) => {
 
     const settings = getOptimalSettings();
 
+    // Theme-aware colors
+    const globeColors = isDark ? {
+      dark: 1,
+      baseColor: [0.02, 0.02, 0.05] as [number, number, number],
+      markerColor: [0.23, 0.51, 0.96] as [number, number, number],
+      glowColor: [0.1, 0.1, 0.3] as [number, number, number],
+    } : {
+      dark: 0,
+      baseColor: [0.95, 0.96, 0.98] as [number, number, number],
+      markerColor: [0.23, 0.51, 0.96] as [number, number, number],
+      glowColor: [0.7, 0.75, 0.9] as [number, number, number],
+    };
+
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: settings.devicePixelRatio,
       width: width * settings.devicePixelRatio,
       height: width * settings.devicePixelRatio,
       phi: 0,
       theta: 0.3,
-      dark: 1,
-      diffuse: 1.2,
+      dark: globeColors.dark,
+      diffuse: isDark ? 1.2 : 0.8,
       mapSamples: settings.mapSamples,
-      mapBrightness: 6,
-      baseColor: [0.02, 0.02, 0.05],
-      markerColor: [0.23, 0.51, 0.96],
-      glowColor: [0.1, 0.1, 0.3],
+      mapBrightness: isDark ? 6 : 4,
+      baseColor: globeColors.baseColor,
+      markerColor: globeColors.markerColor,
+      glowColor: globeColors.glowColor,
       markers: markers as any,
       onRender: (state) => {
         if (!isVisibleRef.current) return;
@@ -108,6 +124,33 @@ const Globe = memo(({ className }: { className?: string }) => {
     });
 
     globeRef.current = globe;
+
+    // Update globe colors when theme changes
+    const updateGlobeColors = () => {
+      if (globeRef.current) {
+        const currentIsDark = document.documentElement.classList.contains('dark');
+        if (currentIsDark) {
+          globeRef.current.dark = 1;
+          globeRef.current.baseColor = [0.02, 0.02, 0.05];
+          globeRef.current.glowColor = [0.1, 0.1, 0.3];
+          globeRef.current.diffuse = 1.2;
+          globeRef.current.mapBrightness = 6;
+        } else {
+          globeRef.current.dark = 0;
+          globeRef.current.baseColor = [0.95, 0.96, 0.98];
+          globeRef.current.glowColor = [0.7, 0.75, 0.9];
+          globeRef.current.diffuse = 0.8;
+          globeRef.current.mapBrightness = 4;
+        }
+      }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateGlobeColors);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
 
     // Mark as loaded after a short delay to ensure globe is rendering
     const loadTimeout = setTimeout(() => {
@@ -136,6 +179,7 @@ const Globe = memo(({ className }: { className?: string }) => {
     return () => {
       clearTimeout(loadTimeout);
       clearTimeout(fadeTimeout);
+      observer.disconnect();
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -144,7 +188,7 @@ const Globe = memo(({ className }: { className?: string }) => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
 
-  }, []);
+  }, [isDark]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full" style={{ aspectRatio: "1" }}>
@@ -153,16 +197,24 @@ const Globe = memo(({ className }: { className?: string }) => {
         className="absolute inset-0 rounded-full transition-opacity duration-1000 ease-out"
         style={{
           opacity: showGlobe ? 0 : 1,
-          background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0.95) 100%)',
-          boxShadow: `
-            inset -25px -25px 80px rgba(0,0,0,0.9),
-            inset 25px 25px 80px rgba(255,255,255,0.08),
-            0 0 0 1px rgba(255,255,255,0.05)
-          `,
+          background: isDark 
+            ? 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0.95) 100%)'
+            : 'radial-gradient(circle at 30% 30%, rgba(59,130,246,0.15) 0%, rgba(255,255,255,0.7) 35%, rgba(248,250,252,0.9) 70%, rgba(255,255,255,0.95) 100%)',
+          boxShadow: isDark
+            ? `
+                inset -25px -25px 80px rgba(0,0,0,0.9),
+                inset 25px 25px 80px rgba(255,255,255,0.08),
+                0 0 0 1px rgba(255,255,255,0.05)
+              `
+            : `
+                inset -25px -25px 80px rgba(59,130,246,0.1),
+                inset 25px 25px 80px rgba(255,255,255,0.8),
+                0 0 0 1px rgba(59,130,246,0.1)
+              `,
           transform: 'translateZ(0)',
           willChange: 'opacity',
           pointerEvents: 'none',
-          border: '1px solid rgba(255,255,255,0.03)',
+          border: isDark ? '1px solid rgba(255,255,255,0.03)' : '1px solid rgba(59,130,246,0.1)',
         }}
       />
       

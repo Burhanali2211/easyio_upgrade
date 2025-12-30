@@ -76,7 +76,7 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
             <Loader2 className="text-primary/50" size={20} />
           </div>
         </div>
-        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Loading projects...</span>
+        <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">Loading projects...</span>
       </div>
     );
   }
@@ -84,8 +84,8 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
   if (projects.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-          <Database size={24} className="text-white/30" strokeWidth={1.5} />
+        <div className="w-16 h-16 rounded-full bg-muted dark:bg-white/5 border border-border dark:border-white/10 flex items-center justify-center">
+          <Database size={24} className="text-muted-foreground dark:text-white/30" strokeWidth={1.5} />
         </div>
         <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">No projects available</p>
       </div>
@@ -93,43 +93,43 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
   }
 
   return (
-    <div>
+    <div className="container">
       {/* Search and Filter Section */}
-      <div className="mb-8 sm:mb-12 space-y-6">
+      <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
         {/* Search Bar */}
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} strokeWidth={1.5} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground dark:text-white/40" size={18} strokeWidth={1.5} />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search projects by name, tech, client..."
-            className="w-full pl-12 pr-12 py-4 rounded-xl sm:rounded-2xl bg-white/[0.04] border border-white/10 text-white placeholder:text-white/30 text-sm sm:text-base font-medium focus:border-primary/40 focus:bg-white/[0.06] focus:outline-none transition-all"
+            className="w-full pl-12 pr-12 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-card dark:bg-white/[0.04] border border-border dark:border-white/10 text-foreground dark:text-white placeholder:text-muted-foreground dark:placeholder:text-white/30 text-sm sm:text-base font-medium focus:border-primary/40 dark:focus:bg-white/[0.06] focus:outline-none transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-lg hover:bg-white/5 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-lg hover:bg-muted dark:hover:bg-white/5 transition-colors"
             >
-              <X size={16} className="text-white/40" />
+              <X size={16} className="text-muted-foreground dark:text-white/40" />
             </button>
           )}
         </div>
 
         {/* Filters Row */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <Filter size={14} className="text-white/40" />
-            <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider">Filter:</span>
+            <Filter size={14} className="text-muted-foreground dark:text-white/40" />
+            <span className="text-[10px] font-mono text-muted-foreground dark:text-white/40 uppercase tracking-wider">Filter:</span>
           </div>
           
           <button
             onClick={() => setSelectedCategory(null)}
-            className={`px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all ${
               selectedCategory === null
-                ? 'bg-primary text-white border border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]'
-                : 'bg-white/[0.04] text-white/60 border border-white/10 hover:border-primary/30 hover:text-white/80'
+                ? 'bg-primary text-primary-foreground border border-primary shadow-[0_0_20px_rgba(var(--primary),0.3)]'
+                : 'bg-muted/50 dark:bg-white/[0.04] text-muted-foreground dark:text-white/60 border border-border dark:border-white/10 hover:border-primary/30 dark:hover:text-white/80'
             }`}
           >
             All
@@ -139,10 +139,10 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 selectedCategory === category
-                  ? 'bg-primary text-white border border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]'
-                  : 'bg-white/[0.04] text-white/60 border border-white/10 hover:border-primary/30 hover:text-white/80'
+                  ? 'bg-primary text-primary-foreground border border-primary shadow-[0_0_20px_rgba(var(--primary),0.3)]'
+                  : 'bg-muted/50 dark:bg-white/[0.04] text-muted-foreground dark:text-white/60 border border-border dark:border-white/10 hover:border-primary/30 dark:hover:text-white/80'
               }`}
             >
               {category}
@@ -151,11 +151,11 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
 
           {/* Sort Dropdown */}
           <div className="ml-auto flex items-center gap-2">
-            <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider">Sort:</span>
+            <span className="text-[10px] font-mono text-muted-foreground dark:text-white/40 uppercase tracking-wider">Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'featured')}
-              className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-white text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider focus:border-primary/40 focus:outline-none transition-all"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-card dark:bg-white/[0.04] border border-border dark:border-white/10 text-foreground dark:text-white text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider focus:border-primary/40 focus:outline-none transition-all"
             >
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
@@ -166,7 +166,7 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
 
         {/* Results Count */}
         {filteredProjects.length !== projects.length && (
-          <div className="text-sm font-mono text-white/40 uppercase tracking-wider">
+          <div className="text-xs sm:text-sm font-mono text-muted-foreground dark:text-white/40 uppercase tracking-wider">
             Showing {filteredProjects.length} of {projects.length} projects
           </div>
         )}
@@ -175,8 +175,8 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
       {/* No Results */}
       {filteredProjects.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-            <Database size={24} className="text-white/30" strokeWidth={1.5} />
+          <div className="w-16 h-16 rounded-full bg-muted dark:bg-white/5 border border-border dark:border-white/10 flex items-center justify-center">
+            <Database size={24} className="text-muted-foreground dark:text-white/30" strokeWidth={1.5} />
           </div>
           <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">
             No projects found matching your criteria
@@ -186,7 +186,7 @@ export default function ProjectsGrid({ projects, loading }: ProjectsGridProps) {
 
       {/* Projects Grid */}
       {filteredProjects.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredProjects.map((project, index) => (
             <div key={project.id} className="flex">
               <ProjectCard 

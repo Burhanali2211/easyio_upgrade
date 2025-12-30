@@ -61,7 +61,7 @@ export default function DesktopNav({ networkStats, socialLinks }: DesktopNavProp
                   }`}
                 >
                   {isActive && (
-                    <div className="absolute left-0 w-1 h-6 bg-white rounded-r-full" />
+                    <div className="absolute left-0 w-1 h-6 bg-primary dark:bg-white rounded-r-full" />
                   )}
                     <div className={`mr-4 transition-all duration-300 ${isActive ? item.color : `text-muted-foreground group-hover:${item.color}`} group-hover:scale-110 group-hover:rotate-3`}>
                       <Icon size={18} />
@@ -69,7 +69,7 @@ export default function DesktopNav({ networkStats, socialLinks }: DesktopNavProp
                   <span className="text-[11px] font-black uppercase tracking-[0.15em] font-mono">
                     {item.name}
                   </span>
-                  <ChevronRight size={12} className={`ml-auto opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? "opacity-100 text-white" : ""}`} />
+                  <ChevronRight size={12} className={`ml-auto opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? "opacity-100 text-primary dark:text-white" : ""}`} />
                 </Link>
               );
             })}

@@ -27,15 +27,15 @@ export default function TerminalWidget({ lines, onCommand }: TerminalWidgetProps
   };
 
   return (
-    <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#08080f] border border-white/10 overflow-hidden relative group">
+    <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-card dark:bg-[#08080f] border border-border dark:border-white/10 overflow-hidden relative group">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="flex items-center gap-2 mb-4 pb-4 border-b border-white/10 relative z-10">
+      <div className="flex items-center gap-2 mb-4 pb-4 border-b border-border dark:border-white/10 relative z-10">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-500/80 animate-pulse" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
           <div className="w-3 h-3 rounded-full bg-emerald-500/80 animate-pulse" />
         </div>
-        <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest ml-2">terminal_v2.5_interactive</span>
+        <span className="text-[10px] font-mono text-muted-foreground dark:text-white/50 uppercase tracking-widest ml-2">terminal_v2.5_interactive</span>
         <div className="ml-auto flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-[8px] font-mono text-emerald-500 uppercase font-bold">LIVE</span>
@@ -44,7 +44,7 @@ export default function TerminalWidget({ lines, onCommand }: TerminalWidgetProps
       
       <div 
         ref={scrollRef}
-        className="font-mono text-xs sm:text-sm space-y-1.5 text-emerald-400 relative z-10 h-[220px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent pr-2"
+        className="font-mono text-xs sm:text-sm space-y-1.5 text-emerald-400 relative z-10 h-[220px] overflow-y-auto overflow-x-hidden hide-scrollbar pr-2"
       >
         {lines.map((line, i) => (
           <motion.div

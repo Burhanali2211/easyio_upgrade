@@ -71,9 +71,9 @@ export default function ProgramsPage() {
               <GraduationCap size={14} className="text-primary" />
               <span className="text-[10px] font-mono text-primary uppercase tracking-widest">The Academy</span>
             </div>
-            <h1 className="text-white mb-6 sm:mb-8 text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter">
+            <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter">
               TRAINING THE <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/30">ELITE.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-foreground/30 dark:from-white dark:via-white dark:to-white/30">ELITE.</span>
             </h1>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
               Our training programs are designed to transform talented engineers into world-class architects capable of building global infrastructure.
@@ -81,9 +81,9 @@ export default function ProgramsPage() {
             
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               {highlights.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.02] border border-white/5">
+                <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5">
                   <span className="text-primary">{item.icon}</span>
-                  <span className="text-xs text-white/60">{item.text}</span>
+                  <span className="text-xs text-muted-foreground dark:text-white/60">{item.text}</span>
                 </div>
               ))}
             </div>
@@ -97,7 +97,7 @@ export default function ProgramsPage() {
                   <Loader2 className="text-primary/50" size={20} />
                 </div>
               </div>
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Loading programs...</span>
+              <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">Loading programs...</span>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -110,7 +110,7 @@ export default function ProgramsPage() {
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ y: -5 }}
-                    className="group relative rounded-2xl bg-[#050508] border border-white/5 overflow-hidden hover:border-white/10 transition-all"
+                    className="group relative rounded-2xl bg-card dark:bg-[#050508] border border-border dark:border-white/5 overflow-hidden hover:border-primary/30 dark:hover:border-white/10 transition-all"
                     onMouseEnter={() => setHoveredProgram(program.id)}
                     onMouseLeave={() => setHoveredProgram(null)}
                   >
@@ -130,17 +130,17 @@ export default function ProgramsPage() {
                       </div>
                       
                       <div className="mb-4">
-                        <span className="text-[9px] text-white/30 uppercase tracking-widest font-mono">{program.duration}</span>
+                        <span className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono">{program.duration}</span>
                       </div>
                       
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground dark:text-white mb-3 group-hover:text-primary transition-colors">
                         {program.title}
                       </h3>
-                      <p className="text-white/40 text-sm leading-relaxed mb-6 flex-grow">
+                      <p className="text-muted-foreground dark:text-white/40 text-sm leading-relaxed mb-6 flex-grow">
                         {program.description}
                       </p>
                       
-                      <button className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] group-hover:bg-white group-hover:text-black transition-all flex items-center justify-center gap-2 group/btn">
+                      <button className="w-full py-4 rounded-xl bg-muted dark:bg-white/5 border border-border dark:border-white/10 text-foreground dark:text-white font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-primary-foreground dark:hover:bg-white dark:hover:text-black transition-all flex items-center justify-center gap-2 group/btn">
                         Access Training Protocol 
                         <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform" />
                       </button>
@@ -151,7 +151,7 @@ export default function ProgramsPage() {
             </div>
           )}
 
-          <div className="mt-20 sm:mt-28 lg:mt-32 relative overflow-hidden rounded-3xl bg-[#050508] border border-white/5">
+          <div className="mt-20 sm:mt-28 lg:mt-32 relative overflow-hidden rounded-3xl bg-card dark:bg-[#050508] border border-border dark:border-white/5">
             <div className="absolute inset-0 grid-command opacity-30" />
             <div className="absolute bottom-0 right-0 w-[60%] h-[80%] bg-gradient-to-tl from-primary/5 to-transparent" />
             
@@ -160,49 +160,102 @@ export default function ProgramsPage() {
                 <div>
                   <div className="flex -space-x-3 mb-8">
                     {[1, 2, 3, 4, 5].map((i) => (
-                      <div key={i} className="w-12 h-12 rounded-full border-2 border-[#050508] bg-white/10 overflow-hidden">
+                      <div key={i} className="w-12 h-12 rounded-full border-2 border-card dark:border-[#050508] bg-muted dark:bg-white/10 overflow-hidden">
                         <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=elite${i}`} alt="Student" className="w-full h-full" />
                       </div>
                     ))}
-                    <div className="w-12 h-12 rounded-full border-2 border-[#050508] bg-primary/20 flex items-center justify-center text-primary text-xs font-bold">
+                    <div className="w-12 h-12 rounded-full border-2 border-card dark:border-[#050508] bg-primary/20 flex items-center justify-center text-primary text-xs font-bold">
                       +47
                     </div>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 uppercase tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-4 uppercase tracking-tight">
                     Join the Elite Force
                   </h2>
-                  <p className="text-white/40 mb-8 leading-relaxed">
+                  <p className="text-muted-foreground dark:text-white/40 mb-8 leading-relaxed">
                     Our graduates go on to lead engineering teams at the world's most innovative companies. Are you ready for the challenge?
                   </p>
                   <div className="flex items-center gap-8 mb-8">
                     <div>
-                      <p className="text-3xl font-black text-white">500+</p>
-                      <p className="text-[9px] text-white/30 uppercase tracking-widest font-mono">Alumni</p>
+                      <p className="text-3xl font-black text-foreground dark:text-white">500+</p>
+                      <p className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono">Alumni</p>
                     </div>
-                    <div className="w-[1px] h-10 bg-white/10" />
+                    <div className="w-[1px] h-10 bg-border dark:bg-white/10" />
                     <div>
-                      <p className="text-3xl font-black text-white">98%</p>
-                      <p className="text-[9px] text-white/30 uppercase tracking-widest font-mono">Placement</p>
+                      <p className="text-3xl font-black text-foreground dark:text-white">98%</p>
+                      <p className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono">Placement</p>
                     </div>
-                    <div className="w-[1px] h-10 bg-white/10" />
+                    <div className="w-[1px] h-10 bg-border dark:bg-white/10" />
                     <div>
-                      <p className="text-3xl font-black text-white">$180k</p>
-                      <p className="text-[9px] text-white/30 uppercase tracking-widest font-mono">Avg Salary</p>
+                      <p className="text-3xl font-black text-foreground dark:text-white">$180k</p>
+                      <p className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono">Avg Salary</p>
                     </div>
                   </div>
-                  <button className="px-8 py-4 bg-white text-black font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-transform">
+                  <button className="px-8 py-4 bg-primary text-primary-foreground font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-transform">
                     Initiate Enrollment
                   </button>
                 </div>
                 
                 <div className="relative">
-                  <div className="aspect-video rounded-2xl overflow-hidden bg-white/[0.02] border border-white/10 flex items-center justify-center group cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="w-20 h-20 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center text-primary/60 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all shadow-[0_0_20px_rgba(var(--primary),0.1)] group-hover:shadow-[0_0_30px_rgba(var(--primary),0.3)]">
-                      <Users size={28} />
+                  <div className="aspect-video rounded-2xl overflow-hidden bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/10 flex items-center justify-center group cursor-pointer relative">
+                    {/* Alumni Images Grid Background - More visible */}
+                    <div className="absolute inset-0 grid grid-cols-4 gap-1 p-3 opacity-30 dark:opacity-20 group-hover:opacity-40 dark:group-hover:opacity-30 transition-opacity">
+                      {[
+                        { seed: 'alumni1', name: 'Sarah Chen' },
+                        { seed: 'alumni2', name: 'Michael Torres' },
+                        { seed: 'alumni3', name: 'Priya Sharma' },
+                        { seed: 'alumni4', name: 'David Kim' },
+                        { seed: 'alumni5', name: 'Emma Wilson' },
+                        { seed: 'alumni6', name: 'James Park' },
+                        { seed: 'alumni7', name: 'Lisa Anderson' },
+                        { seed: 'alumni8', name: 'Ryan Martinez' },
+                      ].map((alumni, i) => (
+                        <div 
+                          key={alumni.seed} 
+                          className="rounded-md overflow-hidden bg-muted dark:bg-white/5 border border-border/50 dark:border-white/5 group-hover:border-primary/20 transition-all relative"
+                          title={alumni.name}
+                        >
+                          <img 
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${alumni.seed}`} 
+                            alt={alumni.name} 
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Play Button */}
+                    <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary/10 dark:bg-primary/5 border-2 border-primary/30 dark:border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all shadow-[0_0_20px_rgba(var(--primary),0.1)] group-hover:shadow-[0_0_40px_rgba(var(--primary),0.4)] backdrop-blur-sm">
+                      <div className="ml-1 sm:ml-1.5">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="sm:w-8 sm:h-8">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    {/* Alumni Count Badge */}
+                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 px-3 py-1.5 rounded-full bg-background/90 dark:bg-black/70 backdrop-blur-md border border-border dark:border-white/10 shadow-lg">
+                      <div className="flex items-center gap-2">
+                        <Users size={14} className="text-primary" />
+                        <span className="text-[10px] font-mono font-bold text-foreground dark:text-white uppercase tracking-wider">
+                          500+ Alumni
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Success Stories Text Overlay */}
+                    <div className="absolute bottom-3 left-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="px-3 py-2 rounded-lg bg-background/90 dark:bg-black/70 backdrop-blur-md border border-border dark:border-white/10">
+                        <p className="text-[9px] font-mono font-bold text-foreground dark:text-white uppercase tracking-wider text-center">
+                          Watch Success Stories
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-center mt-4 text-[9px] text-white/30 uppercase tracking-[0.3em]">Watch Alumni Success Stories</p>
+                  <p className="text-center mt-4 text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-[0.3em]">Watch Alumni Success Stories</p>
                 </div>
               </div>
             </div>

@@ -61,7 +61,7 @@ export default function MobileNav({ isOpen, setIsOpen, socialLinks }: MobileNavP
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[100] bg-background/80 dark:bg-black/80 backdrop-blur-sm lg:hidden"
             />
 
             {/* Content Drawer */}
@@ -70,11 +70,11 @@ export default function MobileNav({ isOpen, setIsOpen, socialLinks }: MobileNavP
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 z-[105] w-[85%] max-w-sm bg-background border-l border-white/10 shadow-2xl flex flex-col lg:hidden"
+              className="fixed top-0 right-0 bottom-0 z-[105] w-[85%] max-w-sm bg-background border-l border-border dark:border-white/10 shadow-2xl flex flex-col lg:hidden"
             >
               {/* Drawer Header Space */}
-              <div className="h-16 flex items-center px-6 border-b border-white/10">
-                <span className="text-xs font-bold uppercase tracking-widest text-white/70 flex items-center gap-2">
+              <div className="h-16 flex items-center px-6 border-b border-border dark:border-white/10">
+                <span className="text-xs font-bold uppercase tracking-widest text-foreground/70 dark:text-white/70 flex items-center gap-2">
                   <Sparkles size={14} className="text-primary" />
                   Navigation Menu
                 </span>
@@ -98,7 +98,7 @@ export default function MobileNav({ isOpen, setIsOpen, socialLinks }: MobileNavP
                         className={`group flex items-center px-4 py-3.5 rounded-2xl transition-all duration-300 relative overflow-hidden ${
                           isActive 
                             ? "bg-primary/20 text-primary font-bold border border-primary/20" 
-                            : "text-white/60 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/5"
+                            : "text-muted-foreground dark:text-white/60 hover:text-foreground dark:hover:text-white hover:bg-muted dark:hover:bg-white/10 border border-transparent hover:border-border dark:hover:border-white/5"
                         }`}
                       >
                         {isActive && (
@@ -125,12 +125,12 @@ export default function MobileNav({ isOpen, setIsOpen, socialLinks }: MobileNavP
                       <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-30 transition-opacity">
                         <Sparkles size={40} className="text-primary" />
                       </div>
-                      <h4 className="text-lg font-bold text-white mb-1 leading-[1.2] pb-0.5">Start Project</h4>
-                      <p className="text-xs text-white/50 mb-4 leading-relaxed">Ready to transform your business infrastructure?</p>
+                      <h4 className="text-lg font-bold text-foreground mb-1 leading-[1.2] pb-0.5">Start Project</h4>
+                      <p className="text-xs text-muted-foreground mb-4 leading-relaxed">Ready to transform your business infrastructure?</p>
                       <Link 
                         href="/contact"
                         onClick={() => setIsOpen(false)}
-                        className="w-full py-3 bg-primary text-white font-bold rounded-xl text-sm transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 flex items-center justify-center gap-2 group"
+                        className="w-full py-3 bg-primary text-primary-foreground font-bold rounded-xl text-sm transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-95 flex items-center justify-center gap-2 group"
                       >
                         Launch Protocol
                         <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -140,10 +140,10 @@ export default function MobileNav({ isOpen, setIsOpen, socialLinks }: MobileNavP
                 </div>
 
                 {/* Drawer Footer */}
-                <div className="p-6 border-t border-white/10 bg-white/[0.02]">
+                <div className="p-6 border-t border-border dark:border-white/10 bg-muted/50 dark:bg-white/[0.02]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">Follow Us</span>
-                    <div className="h-[1px] flex-1 mx-4 bg-white/10" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground dark:text-white/50">Follow Us</span>
+                    <div className="h-[1px] flex-1 mx-4 bg-border dark:bg-white/10" />
                   </div>
                   <SocialLinks links={socialLinks} size="sm" />
                 </div>

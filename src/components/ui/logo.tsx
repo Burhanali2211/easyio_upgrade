@@ -80,15 +80,15 @@ const Logo = ({ className = "" }: { className?: string }) => {
           <div className="relative z-10 flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 12H20M4 6H20M4 18H14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-primary" />
-              <path d="M4 12V6M20 12V6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-white" />
+              <path d="M4 12V6M20 12V6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-foreground" />
             </svg>
           </div>
         </div>
         <div className="flex flex-col">
-          <span className="text-xl font-display font-black tracking-tighter text-white leading-[1.2] pb-0.5">
+          <span className="text-xl font-display font-black tracking-tighter text-foreground leading-[1.2] pb-0.5">
             {siteName.includes('IO') ? (
               <>
-                {siteName.split('IO')[0]}<span className="text-white">IO</span>
+                {siteName.split('IO')[0]}<span className="text-foreground">IO</span>
               </>
             ) : (
               siteName
@@ -139,7 +139,7 @@ const Logo = ({ className = "" }: { className?: string }) => {
             <div className="relative z-10 flex items-center justify-center">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 12H20M4 6H20M4 18H14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-primary" />
-                <path d="M4 12V6M20 12V6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-white" />
+                <path d="M4 12V6M20 12V6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-foreground" />
               </svg>
             </div>
 
@@ -150,10 +150,10 @@ const Logo = ({ className = "" }: { className?: string }) => {
       </div>
       
       <div className="flex flex-col">
-        <span className="text-xl font-display font-black tracking-tighter text-white leading-[1.2] pb-0.5">
+        <span className="text-xl font-display font-black tracking-tighter text-foreground leading-[1.2] pb-0.5">
           {siteName.includes('IO') ? (
             <>
-              {siteName.split('IO')[0]}<span className="text-white">iO</span>
+              {siteName.split('IO')[0]}<span className="text-foreground">iO</span>
             </>
           ) : (
             siteName

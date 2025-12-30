@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { TeamMember } from "./types";
+import { TeamMember } from "../types";
 
 export function useTeamData() {
   const [team, setTeam] = useState<TeamMember[]>([]);

@@ -21,7 +21,7 @@ const Testimonials = memo(({ testimonials = [] }: TestimonialsProps) => {
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="w-full bg-muted dark:bg-[#030306] py-16 sm:py-24 lg:py-32 overflow-hidden relative z-10">
+    <section id="testimonials" className="w-full bg-muted/50 dark:bg-[#030306] py-16 sm:py-24 lg:py-32 overflow-hidden relative z-10">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[20%] left-[5%] w-[300px] h-[300px] bg-primary/5 blur-[100px] rounded-full" />
         <div className="absolute bottom-[20%] right-[10%] w-[250px] h-[250px] bg-accent/5 blur-[80px] rounded-full" />
@@ -52,14 +52,14 @@ const Testimonials = memo(({ testimonials = [] }: TestimonialsProps) => {
       </div>
 
       <div className="relative flex overflow-hidden group">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-muted dark:from-[#030306] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-muted dark:from-[#030306] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-muted/50 dark:from-[#030306] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-muted/50 dark:from-[#030306] to-transparent z-10 pointer-events-none" />
         
-        <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap py-4">
+        <div className="flex animate-marquee-mobile sm:animate-marquee hover:[animation-play-state:paused] whitespace-nowrap py-4 will-change-transform">
           {duplicatedTestimonials.map((testimonial, idx) => (
             <div 
               key={`${testimonial.id}-${idx}`}
-              className="group/card inline-flex flex-col w-[320px] sm:w-[400px] lg:w-[450px] mx-2 sm:mx-3 p-6 sm:p-8 bg-card dark:bg-[#050508] border border-border dark:border-white/5 rounded-2xl whitespace-normal hover:border-primary/20 dark:hover:border-white/10 transition-all relative overflow-hidden"
+              className="group/card inline-flex flex-col w-[280px] sm:w-[400px] lg:w-[450px] mx-2 sm:mx-3 p-6 sm:p-8 bg-card dark:bg-[#050508] border-2 sm:border border-border/80 dark:border-white/30 sm:border-border/60 sm:dark:border-white/10 rounded-2xl whitespace-normal hover:border-primary/20 dark:hover:border-white/10 transition-all relative overflow-hidden flex-shrink-0"
             >
               <div className="absolute top-6 right-6 text-foreground/5 dark:text-white/5 group-hover/card:text-foreground/10 dark:group-hover/card:text-white/10 transition-colors">
                 <Quote size={40} />
@@ -109,8 +109,20 @@ const Testimonials = memo(({ testimonials = [] }: TestimonialsProps) => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+        @keyframes marquee-mobile {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
         .animate-marquee {
           animation: marquee 60s linear infinite;
+        }
+        .animate-marquee-mobile {
+          animation: marquee-mobile 40s linear infinite;
+        }
+        @media (max-width: 640px) {
+          .animate-marquee-mobile {
+            animation: marquee-mobile 30s linear infinite;
+          }
         }
       `}</style>
     </section>

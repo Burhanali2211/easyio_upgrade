@@ -52,7 +52,7 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
   };
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 relative bg-muted dark:bg-[#050505] z-10" data-section="innovation-hub">
+    <section className="py-16 sm:py-24 lg:py-32 relative bg-muted/30 dark:bg-[#050505] z-10" data-section="innovation-hub">
       <div className="container relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-16 lg:mb-20 gap-6 sm:gap-8">
           <div className="max-w-2xl">
@@ -76,26 +76,26 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
               <div
                 key={item.id}
                 style={{ animationDelay: `${index * 100}ms` }}
-                className="group relative p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-[2rem] bg-card dark:bg-white/[0.02] border border-border dark:border-white/5 hover:bg-card/80 dark:hover:bg-white/[0.04] hover:border-primary/20 dark:hover:border-white/10 hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all duration-300 overflow-hidden animate-fadeIn"
+                className="group relative p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-[2rem] bg-card dark:bg-white/[0.02] border-2 sm:border border-border/80 dark:border-white/25 sm:border-border/60 sm:dark:border-white/5 hover:bg-emerald-500/[0.03] dark:hover:bg-emerald-500/[0.03] hover:border-emerald-500/20 dark:hover:border-emerald-500/20 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-all duration-300 overflow-hidden animate-fadeIn backdrop-blur-sm"
               >
-                <div className={`absolute top-0 right-0 p-4 sm:p-8 opacity-[0.03] group-hover:opacity-10 group-hover:scale-[2.5] transition-all duration-700 ease-out ${IconColors[item.icon_type] || "text-primary"} group-hover:-rotate-12`}>
+                <div className={`absolute top-0 right-0 p-4 sm:p-8 opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-[1.8] sm:group-hover:scale-[2] transition-all duration-700 ease-out text-emerald-500/40 group-hover:text-emerald-500/60 group-hover:-rotate-12 origin-top-right`}>
                   <Icon className="w-12 h-12 sm:w-16 sm:h-16" />
                 </div>
                 
                 <div className="relative z-10">
-                  <span className="text-[8px] sm:text-[10px] font-mono font-bold text-accent uppercase tracking-widest mb-2 sm:mb-4 block">
+                  <span className="text-[8px] sm:text-[10px] font-mono font-bold text-emerald-500/70 dark:text-emerald-500/70 uppercase tracking-widest mb-2 sm:mb-4 block group-hover:text-emerald-500 transition-colors duration-300">
                     {item.category}
                   </span>
-                  <h3 className="text-base sm:text-xl lg:text-2xl font-display font-bold text-foreground mb-2 sm:mb-4 group-hover:text-accent transition-colors duration-300">
+                  <h3 className="text-base sm:text-xl lg:text-2xl font-display font-bold text-foreground mb-2 sm:mb-4 group-hover:text-emerald-500/90 dark:group-hover:text-emerald-500/90 transition-colors duration-300">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4 sm:mb-8 line-clamp-3 sm:line-clamp-none pb-1">
                     {item.description}
                   </p>
                   
-                  <div className="pt-3 sm:pt-6 border-t border-border dark:border-white/5 flex items-center justify-between">
+                  <div className="pt-3 sm:pt-6 border-t border-border dark:border-white/5 group-hover:border-emerald-500/20 dark:group-hover:border-emerald-500/20 transition-colors duration-300 flex items-center justify-between">
                     <span className="text-[8px] sm:text-[10px] font-mono text-muted-foreground uppercase tracking-tighter">Metric</span>
-                    <span className="text-xs sm:text-sm font-bold text-foreground">{item.stats}</span>
+                    <span className="text-xs sm:text-sm font-bold text-foreground group-hover:text-emerald-500/90 dark:group-hover:text-emerald-500/90 transition-colors duration-300">{item.stats}</span>
                   </div>
                 </div>
               </div>
@@ -129,8 +129,8 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
       </div>
 
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10">
-        <div className="absolute top-[20%] left-[10%] w-[150px] sm:w-[250px] h-[150px] sm:h-[250px] bg-accent/30 blur-[80px] rounded-full" />
-        <div className="absolute bottom-[20%] right-[10%] w-[150px] sm:w-[250px] h-[150px] sm:h-[250px] bg-primary/30 blur-[80px] rounded-full" />
+        <div className="absolute top-[20%] left-[10%] w-[150px] sm:w-[250px] h-[150px] sm:h-[250px] bg-emerald-500/30 blur-[80px] rounded-full" />
+        <div className="absolute bottom-[20%] right-[10%] w-[150px] sm:w-[250px] h-[150px] sm:h-[250px] bg-emerald-500/20 blur-[80px] rounded-full" />
       </div>
     </section>
   );

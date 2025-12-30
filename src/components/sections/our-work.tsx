@@ -31,7 +31,7 @@ const OurWork = memo(({ projects = [] }: OurWorkProps) => {
   };
 
   return (
-    <section id="our-work" className="py-16 sm:py-24 bg-background dark:bg-[#020202] relative z-10">
+    <section id="our-work" className="py-16 sm:py-24 bg-background relative z-10">
       <div className="container">
         <div className="flex flex-col mb-10 sm:mb-16">
           <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 animate-fadeIn">

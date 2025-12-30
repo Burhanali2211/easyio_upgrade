@@ -19,7 +19,7 @@ export default function TeamGrid({ team, loading }: TeamGridProps) {
             <Loader2 className="text-primary/50" size={20} />
           </div>
         </div>
-        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Loading team...</span>
+        <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">Loading team...</span>
       </div>
     );
   }

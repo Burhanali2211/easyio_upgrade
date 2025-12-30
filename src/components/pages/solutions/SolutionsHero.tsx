@@ -16,7 +16,7 @@ export default function SolutionsHero() {
         <span className="text-[10px] font-mono text-primary uppercase tracking-widest">Logic Engines</span>
       </div>
       
-      <h1 className="text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight">
+      <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight">
         SYSTEM <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/30">
           ARCHITECTURES.
@@ -39,8 +39,8 @@ export default function SolutionsHero() {
             <Zap size={18} className="text-primary" strokeWidth={2} />
           </div>
           <div>
-            <div className="text-sm font-mono text-white/40 uppercase tracking-wider">Featured</div>
-            <div className="text-lg font-display font-bold text-white">Engines</div>
+            <div className="text-sm font-mono text-muted-foreground dark:text-white/40 uppercase tracking-wider">Featured</div>
+            <div className="text-lg font-display font-bold text-foreground dark:text-white">Engines</div>
           </div>
         </motion.div>
 
@@ -54,8 +54,8 @@ export default function SolutionsHero() {
             <TrendingUp size={18} className="text-primary" strokeWidth={2} />
           </div>
           <div>
-            <div className="text-sm font-mono text-white/40 uppercase tracking-wider">Enterprise</div>
-            <div className="text-lg font-display font-bold text-white">Ready</div>
+            <div className="text-sm font-mono text-muted-foreground dark:text-white/40 uppercase tracking-wider">Enterprise</div>
+            <div className="text-lg font-display font-bold text-foreground dark:text-white">Ready</div>
           </div>
         </motion.div>
       </div>

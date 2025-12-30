@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { cache } from 'react';
-import { CACHE_TAGS, CACHE_REVALIDATE, createCacheKey } from '@/lib/cache/config';
+import { CACHE_TAGS, CACHE_REVALIDATE } from '@/lib/cache/config';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -28,10 +28,13 @@ async function fetchWithFallback<T>(
 // Partners - Static content (rarely changes)
 export const getPartners = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('partners')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('partners')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -39,10 +42,13 @@ export const getPartners = cache(async () => {
 // Metrics - Dynamic content (changes frequently)
 export const getMetrics = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('metrics')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('metrics')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -50,10 +56,13 @@ export const getMetrics = cache(async () => {
 // Solutions - Semi-static content (changes occasionally)
 export const getSolutions = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('home_solutions')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('home_solutions')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -61,10 +70,13 @@ export const getSolutions = cache(async () => {
 // Projects - Semi-static content (changes occasionally)
 export const getProjects = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('projects')
-      .select('*')
-      .order('created_at', { ascending: false }),
+    async () => {
+      const result = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -72,11 +84,14 @@ export const getProjects = cache(async () => {
 // Single project - Semi-static content
 export const getProjectById = cache(async (id: string) => {
   return fetchWithFallback(
-    () => supabase
-      .from('projects')
-      .select('*')
-      .eq('id', id)
-      .single(),
+    async () => {
+      const result = await supabase
+        .from('projects')
+        .select('*')
+        .eq('id', id)
+        .single();
+      return { data: result.data, error: result.error };
+    },
     null
   );
 });
@@ -84,10 +99,13 @@ export const getProjectById = cache(async (id: string) => {
 // Innovation Hub - Semi-static content
 export const getInnovationHub = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('innovation_hub')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('innovation_hub')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -95,10 +113,13 @@ export const getInnovationHub = cache(async () => {
 // Testimonials - Dynamic content (changes frequently)
 export const getTestimonials = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('testimonials')
-      .select('*')
-      .order('created_at', { ascending: false }),
+    async () => {
+      const result = await supabase
+        .from('testimonials')
+        .select('*')
+        .order('created_at', { ascending: false });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -106,10 +127,13 @@ export const getTestimonials = cache(async () => {
 // Team Members - Static content (rarely changes)
 export const getTeamMembers = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('team_members')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('team_members')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -117,10 +141,13 @@ export const getTeamMembers = cache(async () => {
 // Courses - Semi-static content
 export const getCourses = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('courses')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('courses')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -128,10 +155,13 @@ export const getCourses = cache(async () => {
 // Programs - Semi-static content
 export const getPrograms = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('programs')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('programs')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -139,10 +169,13 @@ export const getPrograms = cache(async () => {
 // ERP Features - Static content
 export const getErpFeatures = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('erp_features')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('erp_features')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });
@@ -150,10 +183,13 @@ export const getErpFeatures = cache(async () => {
 // Logic Engines - Static content
 export const getLogicEngines = cache(async () => {
   return fetchWithFallback(
-    () => supabase
-      .from('logic_engines')
-      .select('*')
-      .order('created_at', { ascending: true }),
+    async () => {
+      const result = await supabase
+        .from('logic_engines')
+        .select('*')
+        .order('created_at', { ascending: true });
+      return { data: result.data, error: result.error };
+    },
     []
   );
 });

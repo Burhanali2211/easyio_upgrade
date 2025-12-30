@@ -8,6 +8,21 @@ type ReporterProps = {
   reset?: () => void;
 };
 
+// List of errors that should be ignored (non-critical)
+const IGNORED_ERRORS = [
+  'ResizeObserver loop limit exceeded',
+  'ResizeObserver loop completed with undelivered notifications',
+  'Non-Error promise rejection captured',
+  'ChunkLoadError',
+  'Loading chunk',
+  'Failed to fetch dynamically imported module',
+];
+
+function shouldIgnoreError(error: Error | string): boolean {
+  const errorMessage = typeof error === 'string' ? error : error.message || '';
+  return IGNORED_ERRORS.some(ignored => errorMessage.includes(ignored));
+}
+
 export default function ErrorReporter({ error, reset }: ReporterProps) {
   /* ─ instrumentation shared by every route ─ */
   const lastOverlayMsg = useRef("");
@@ -17,9 +32,20 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
     const inIframe = window.parent !== window;
     if (!inIframe) return;
 
-    const send = (payload: unknown) => window.parent.postMessage(payload, "*");
+    const send = (payload: unknown) => {
+      try {
+        window.parent.postMessage(payload, "*");
+      } catch (e) {
+        // Silently fail if postMessage fails
+      }
+    };
 
-    const onError = (e: ErrorEvent) =>
+    const onError = (e: ErrorEvent) => {
+      // Ignore non-critical errors
+      if (shouldIgnoreError(e.message || e.error?.message || '')) {
+        return;
+      }
+      
       send({
         type: "ERROR_CAPTURED",
         error: {
@@ -32,8 +58,14 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
         },
         timestamp: Date.now(),
       });
+    };
 
-    const onReject = (e: PromiseRejectionEvent) =>
+    const onReject = (e: PromiseRejectionEvent) => {
+      // Ignore non-critical promise rejections
+      if (shouldIgnoreError(e.reason?.message || String(e.reason))) {
+        return;
+      }
+      
       send({
         type: "ERROR_CAPTURED",
         error: {
@@ -43,6 +75,7 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
         },
         timestamp: Date.now(),
       });
+    };
 
     const pollOverlay = () => {
       const overlay = document.querySelector("[data-nextjs-dialog-overlay]");
@@ -91,8 +124,24 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
     );
   }, [error]);
 
+  // Handle ignored errors with redirect
+  useEffect(() => {
+    if (error && shouldIgnoreError(error) && typeof window !== 'undefined') {
+      // Auto-recover from non-critical errors by redirecting to home
+      const timer = setTimeout(() => {
+        window.location.href = '/';
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   /* ─ ordinary pages render nothing ─ */
   if (!error) return null;
+
+  // Check if error should be ignored - don't show error page
+  if (error && shouldIgnoreError(error)) {
+    return null;
+  }
 
   /* ─ global-error UI ─ */
   return (
@@ -104,10 +153,39 @@ export default function ErrorReporter({ error, reset }: ReporterProps) {
               Something went wrong!
             </h1>
             <p className="text-muted-foreground">
-              An unexpected error occurred. Please try again fixing with Orchids
+              An unexpected error occurred. Please try again.
             </p>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-4">
+            <div className="flex gap-3 justify-center">
+              {reset && (
+                <button
+                  onClick={() => {
+                    try {
+                      reset();
+                    } catch (e) {
+                      // If reset fails, try navigating to home
+                      if (typeof window !== 'undefined') {
+                        window.location.href = '/';
+                      }
+                    }
+                  }}
+                  className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                >
+                  Try again
+                </button>
+              )}
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    window.location.href = '/';
+                  }
+                }}
+                className="px-4 py-2 bg-muted text-foreground rounded-lg hover:bg-muted/80 transition-colors"
+              >
+                Go to Home
+              </button>
+            </div>
             {process.env.NODE_ENV === "development" && (
               <details className="mt-4 text-left">
                 <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">

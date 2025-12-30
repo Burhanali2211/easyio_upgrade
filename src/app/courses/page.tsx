@@ -68,9 +68,9 @@ export default function CoursesPage() {
               <BookOpen size={14} className="text-primary" />
               <span className="text-[10px] font-mono text-primary uppercase tracking-widest">Knowledge Center</span>
             </div>
-            <h1 className="text-white mb-6 sm:mb-8 text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter">
+            <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter">
               R&D <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/30">ACADEMY.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-foreground/30 dark:from-white dark:via-white dark:to-white/30">ACADEMY.</span>
             </h1>
             <p className="max-w-xl text-muted-foreground text-base sm:text-lg leading-relaxed">
               Where we bridge the gap between experimental research and production-grade engineering. Learn from the architects who build the future.
@@ -85,19 +85,19 @@ export default function CoursesPage() {
                   <Loader2 className="text-primary/50" size={20} />
                 </div>
               </div>
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Loading curriculum...</span>
+              <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">Loading curriculum...</span>
             </div>
           ) : (
             <>
               <div className="mb-20 sm:mb-28 lg:mb-32">
                 <div className="flex items-center justify-between mb-10">
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white uppercase tracking-tight flex items-center gap-3">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground dark:text-white uppercase tracking-tight flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                       <BookOpen size={18} />
                     </div>
                     Active Curriculums
                   </h2>
-                  <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">{courses.length} courses</span>
+                  <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">{courses.length} courses</span>
                 </div>
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -108,7 +108,7 @@ export default function CoursesPage() {
                       whileInView={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ y: -5 }}
-                      className="group relative rounded-2xl bg-[#050508] border border-white/5 overflow-hidden hover:border-primary/20 transition-all"
+                      className="group relative rounded-2xl bg-card dark:bg-[#050508] border border-border dark:border-white/5 overflow-hidden hover:border-primary/20 transition-all"
                       onMouseEnter={() => setHoveredCourse(course.id)}
                       onMouseLeave={() => setHoveredCourse(null)}
                     >
@@ -120,28 +120,28 @@ export default function CoursesPage() {
                           <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform">
                             <Play size={12} className="text-primary ml-0.5" />
                           </div>
-                          <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Course</span>
+                          <span className="text-[9px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">Course</span>
                         </div>
                         
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground dark:text-white mb-3 group-hover:text-primary transition-colors">
                           {course.title}
                         </h3>
-                        <p className="text-white/40 text-sm leading-relaxed mb-6 flex-grow">
+                        <p className="text-muted-foreground dark:text-white/40 text-sm leading-relaxed mb-6 flex-grow">
                           {course.description}
                         </p>
                         
-                        <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                        <div className="pt-6 border-t border-border dark:border-white/5 flex items-center justify-between">
                           <div>
-                            <p className="text-[9px] text-white/30 uppercase tracking-widest font-mono mb-1">Instructor</p>
-                            <p className="text-white text-sm font-medium">{course.instructor}</p>
+                            <p className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono mb-1">Instructor</p>
+                            <p className="text-foreground dark:text-white text-sm font-medium">{course.instructor}</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-[9px] text-white/30 uppercase tracking-widest font-mono mb-1">Investment</p>
-                            <p className="text-xl font-black text-white group-hover:scale-110 transition-transform">{course.price}</p>
+                            <p className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono mb-1">Investment</p>
+                            <p className="text-xl font-black text-foreground dark:text-white group-hover:scale-110 transition-transform">{course.price}</p>
                           </div>
                         </div>
                         
-                        <button className="mt-6 w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all flex items-center justify-center gap-2 group/btn">
+                        <button className="mt-6 w-full py-4 rounded-xl bg-muted dark:bg-white/5 border border-border dark:border-white/10 text-foreground dark:text-white font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-primary-foreground dark:hover:bg-white dark:hover:text-black transition-all flex items-center justify-center gap-2 group/btn">
                           Activate Course
                           <ArrowRight size={12} className="group-hover/btn:translate-x-1 transition-transform" />
                         </button>
@@ -153,13 +153,13 @@ export default function CoursesPage() {
 
               <div>
                 <div className="flex items-center justify-between mb-10">
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white uppercase tracking-tight flex items-center gap-3">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground dark:text-white uppercase tracking-tight flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
                       <FlaskConical size={18} />
                     </div>
                     Current Experiments
                   </h2>
-                  <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">{experiments.length} active</span>
+                  <span className="text-[10px] font-mono text-muted-foreground dark:text-white/30 uppercase tracking-widest">{experiments.length} active</span>
                 </div>
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -170,7 +170,7 @@ export default function CoursesPage() {
                       whileInView={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ y: -5 }}
-                      className="group relative p-6 sm:p-8 rounded-2xl bg-[#050508] border border-white/5 overflow-hidden hover:border-accent/20 transition-all"
+                      className="group relative p-6 sm:p-8 rounded-2xl bg-card dark:bg-[#050508] border border-border dark:border-white/5 overflow-hidden hover:border-accent/20 transition-all"
                     >
                       <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 blur-[50px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       
@@ -185,10 +185,10 @@ export default function CoursesPage() {
                           </div>
                         </div>
                         
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground dark:text-white mb-3 group-hover:text-accent transition-colors">
                           {exp.title}
                         </h3>
-                        <p className="text-white/40 text-sm leading-relaxed mb-6">
+                        <p className="text-muted-foreground dark:text-white/40 text-sm leading-relaxed mb-6">
                           {exp.description}
                         </p>
                         
@@ -202,26 +202,26 @@ export default function CoursesPage() {
                 </div>
               </div>
 
-              <div className="mt-20 sm:mt-28 lg:mt-32 relative overflow-hidden rounded-3xl bg-[#050508] border border-white/5">
+              <div className="mt-20 sm:mt-28 lg:mt-32 relative overflow-hidden rounded-3xl bg-card dark:bg-[#050508] border border-border dark:border-white/5">
                 <div className="absolute inset-0 grid-command opacity-30" />
                 <div className="absolute top-0 left-0 w-[50%] h-full bg-gradient-to-r from-primary/5 to-transparent" />
                 
                 <div className="relative p-8 sm:p-12 lg:p-16">
                   <div className="grid lg:grid-cols-2 gap-8 items-center">
                     <div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted dark:bg-white/5 border border-border dark:border-white/10 mb-6">
                         <Sparkles size={12} className="text-primary" />
-                        <span className="text-[9px] font-mono text-white/60 uppercase tracking-widest">Coming Soon</span>
+                        <span className="text-[9px] font-mono text-muted-foreground dark:text-white/60 uppercase tracking-widest">Coming Soon</span>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 uppercase tracking-tight">
+                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-4 uppercase tracking-tight">
                         Enterprise Training Program
                       </h2>
-                      <p className="text-white/40 max-w-md mb-8">
+                      <p className="text-muted-foreground dark:text-white/40 max-w-md mb-8">
                         Custom-tailored curriculum for your organization. Transform your engineering team into infrastructure architects.
                       </p>
                       <button 
                         onClick={() => setIsBriefModalOpen(true)}
-                        className="px-8 py-4 bg-white text-black font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-transform"
+                        className="px-8 py-4 bg-primary text-primary-foreground font-black rounded-xl text-xs uppercase tracking-widest hover:scale-105 transition-transform"
                       >
                         Request Deployment Brief
                       </button>
@@ -234,9 +234,9 @@ export default function CoursesPage() {
                         { value: '40h', label: 'Avg Curriculum' },
                         { value: '12', label: 'Industries Served' },
                       ].map((stat, i) => (
-                        <div key={i} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 text-center">
-                          <div className="text-2xl sm:text-3xl font-black text-white mb-1">{stat.value}</div>
-                          <div className="text-[9px] text-white/30 uppercase tracking-widest font-mono">{stat.label}</div>
+                        <div key={i} className="p-6 rounded-2xl bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5 text-center">
+                          <div className="text-2xl sm:text-3xl font-black text-foreground dark:text-white mb-1">{stat.value}</div>
+                          <div className="text-[9px] text-muted-foreground dark:text-white/30 uppercase tracking-widest font-mono">{stat.label}</div>
                         </div>
                       ))}
                     </div>

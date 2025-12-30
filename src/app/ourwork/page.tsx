@@ -68,7 +68,7 @@ export default function OurWorkPage() {
                 <Code2 size={14} className="text-primary" />
                 <span className="text-[10px] font-mono text-primary uppercase tracking-widest">Enterprise Portfolio</span>
               </div>
-              <h1 className="text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-black tracking-tighter uppercase">
+              <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-black tracking-tighter uppercase">
                 Selected <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/30">Engineering</span> Works.
               </h1>
@@ -90,12 +90,12 @@ export default function OurWorkPage() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
-                  className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/30 transition-all"
+                  className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card dark:bg-white/[0.02] border border-border dark:border-white/5 hover:border-primary/30 transition-all"
                 >
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                     {highlight.icon}
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-white mb-1">{highlight.value}</div>
+                  <div className="text-2xl sm:text-3xl font-black text-foreground dark:text-white mb-1">{highlight.value}</div>
                   <div className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-widest font-mono">{highlight.label}</div>
                 </motion.div>
               ))}
