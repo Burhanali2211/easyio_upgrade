@@ -467,12 +467,12 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
             return (
               <div
                 key={metric.id}
-                className={`group obsidian-card p-5 sm:p-6 rounded-2xl border ${colorScheme.border} ${colorScheme.borderHover} relative overflow-hidden transition-all duration-200 ${colorScheme.bg}`}
+                className={`group obsidian-card p-5 sm:p-6 rounded-2xl border border-border dark:border-white/10 hover:border-border/80 dark:hover:border-white/20 relative overflow-hidden transition-all duration-200 ${colorScheme.bg}`}
               >
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={`p-2 rounded-lg ${colorScheme.bg} border ${colorScheme.border}`}>
+                    <div className={`p-2 rounded-lg ${colorScheme.bg} border border-border dark:border-white/10`}>
                       <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${colorScheme.text}`} />
                     </div>
                     <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-muted-foreground">

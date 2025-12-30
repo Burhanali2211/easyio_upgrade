@@ -52,25 +52,58 @@ const Footer = dynamic(() => import("@/components/sections/footer"), {
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://easyio.tech";
 
 export const metadata: Metadata = {
-  title: "EASYIO Technologies | Best Software Company in Kashmir | Web Development Srinagar",
+  title: "EASYIO Technologies | Best Software Company in Kashmir | Web & App Development Srinagar",
   description:
-    "EASYIO Technologies is the leading software company in Kashmir, offering web development, app development, custom ERP solutions, and digital transformation services in Srinagar, J&K. Best website creators and IT company in Jammu & Kashmir.",
+    "EASYIO Technologies is the #1 software company in Kashmir, offering web development, mobile app development, custom ERP solutions, and digital transformation services in Srinagar, J&K. Top IT company with proven portfolio. Get free quote today!",
   keywords: [
-    "software company in kashmir",
-    "best software company kashmir",
-    "web development srinagar",
-    "IT company J&K",
-    "best website creators",
-    "app development kashmir",
+    // Brand Keywords
     "easyio technologies",
-    "custom ERP solutions",
-    "enterprise software development",
-    "digital transformation kashmir",
+    "easyio tech",
+    "easyio kashmir",
+    "easyio srinagar",
+    // Best/Top Intent Keywords
+    "best software company in kashmir",
+    "best software company in srinagar",
+    "best it company in kashmir",
+    "best web development company in kashmir",
+    "best app development company in kashmir",
+    "top software company in srinagar",
+    "top it company in srinagar",
+    "top web development company in srinagar",
+    "top mobile app development company in srinagar",
+    "best erp software company in kashmir",
+    "best website designer in srinagar",
+    "best web design company in kashmir",
+    // Service Keywords
+    "software company in kashmir",
+    "web development srinagar",
+    "app development kashmir",
+    "mobile app developer srinagar",
+    "erp software kashmir",
+    "custom software development kashmir",
+    "website development company kashmir",
+    "android app development srinagar",
+    "ios app development kashmir",
+    // Location Keywords
+    "IT company J&K",
+    "software company srinagar",
+    "it company jammu kashmir",
+    "technology company kashmir",
+    // Trust Keywords
+    "trusted software company srinagar",
+    "software company with portfolio srinagar",
+    "professional software developers kashmir",
+    "enterprise software solutions kashmir",
+    // Pricing Keywords
+    "software development cost kashmir",
+    "website development cost srinagar",
+    "app development cost srinagar",
+    "get quote software company srinagar",
   ].join(", "),
   openGraph: {
-    title: "EASYIO Technologies | Best Software Company in Kashmir",
+    title: "EASYIO Technologies | Best Software Company in Kashmir | Web & App Development",
     description:
-      "Leading software company in Kashmir offering web development, app development, custom ERP solutions, and digital transformation services.",
+      "Leading software company in Kashmir offering web development, app development, custom ERP solutions, and digital transformation services. Top IT company in Srinagar with proven portfolio.",
     url: siteUrl,
     siteName: "EASYIO Technologies",
     images: [
@@ -78,7 +111,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "EASYIO Technologies - Best Software Company in Kashmir",
+        alt: "EASYIO Technologies - Best Software Company in Kashmir | Web & App Development Srinagar",
       },
     ],
     locale: "en_US",
@@ -88,11 +121,22 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EASYIO Technologies | Best Software Company in Kashmir",
     description:
-      "Leading software company in Kashmir offering web development, app development, custom ERP solutions, and digital transformation services.",
+      "Leading software company in Kashmir offering web development, app development, custom ERP solutions. Top IT company in Srinagar with proven portfolio. Get free quote!",
     images: [`${siteUrl}/og-image.jpg`],
   },
   alternates: {
     canonical: siteUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
