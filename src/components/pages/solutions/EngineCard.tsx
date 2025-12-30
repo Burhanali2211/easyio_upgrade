@@ -58,7 +58,7 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
         relative p-6 sm:p-8 lg:p-10 rounded-xl sm:rounded-[2rem] 
         bg-card dark:bg-white/[0.04] border border-border dark:border-white/10 
         hover:border-primary/40 dark:hover:bg-white/[0.06]
-        transition-all duration-500 flex flex-col h-full overflow-hidden
+        transition-all duration-500 flex flex-col h-full overflow-hidden w-full max-w-full
         ${isFeatured ? 'ring-1 ring-primary/20' : ''}
       `}>
         {/* Background Icon */}
@@ -112,7 +112,7 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
         {/* Title */}
         <h3 className={`
           relative z-10 font-display font-bold text-foreground dark:text-white mb-2 sm:mb-3 
-          group-hover:text-primary transition-colors
+          group-hover:text-primary transition-colors break-words
           ${cardSize === 'large' ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-lg sm:text-xl'}
         `}>
           {engine.title}
@@ -120,7 +120,7 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
 
         {/* Description */}
         <p className={`
-          relative z-10 text-muted-foreground dark:text-white/70 leading-relaxed mb-4 sm:mb-6 flex-grow
+          relative z-10 text-muted-foreground dark:text-white/70 leading-relaxed mb-4 sm:mb-6 flex-grow break-words overflow-wrap-anywhere
           ${cardSize === 'large' ? 'text-base sm:text-lg' : 'text-sm sm:text-base'}
         `}>
           {engine.description}
@@ -128,14 +128,14 @@ const EngineCard = memo(({ engine, index, size = 'medium' }: EngineCardProps) =>
 
         {/* Use Case */}
         {engine.use_case && cardSize === 'large' && (
-          <div className="relative z-10 mb-4 p-4 rounded-xl bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5">
+          <div className="relative z-10 mb-4 p-4 rounded-xl bg-muted/50 dark:bg-white/[0.02] border border-border dark:border-white/5 w-full max-w-full">
             <div className="flex items-center gap-2 mb-2">
               <Layers size={14} className="text-primary/60" strokeWidth={1.5} />
               <span className="text-[10px] font-mono font-bold text-primary/60 uppercase tracking-wider">
                 Use Case
               </span>
             </div>
-            <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{engine.use_case}</p>
+            <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed break-words overflow-wrap-anywhere">{engine.use_case}</p>
           </div>
         )}
 

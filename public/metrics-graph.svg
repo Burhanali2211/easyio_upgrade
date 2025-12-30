@@ -1,0 +1,48 @@
+<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <defs>
+    <!-- Gradient for bars (from bottom to top) -->
+    <linearGradient id="barGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ea580c" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#f97316" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 12 bars with varying heights - positioned from bottom (y=20 is bottom) -->
+  <!-- Bar 1 -->
+  <rect x="0.5" y="12" width="7" height="8" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 2 -->
+  <rect x="8.5" y="8" width="7" height="12" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 3 -->
+  <rect x="16.5" y="6" width="7" height="14" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 4 -->
+  <rect x="24.5" y="5" width="7" height="15" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 5 -->
+  <rect x="32.5" y="4" width="7" height="16" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 6 -->
+  <rect x="40.5" y="3" width="7" height="17" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 7 (highest) -->
+  <rect x="48.5" y="1" width="7" height="19" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 8 -->
+  <rect x="56.5" y="2" width="7" height="18" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 9 -->
+  <rect x="64.5" y="3.5" width="7" height="16.5" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 10 -->
+  <rect x="72.5" y="5" width="7" height="15" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 11 -->
+  <rect x="80.5" y="7" width="7" height="13" rx="0.3" fill="url(#barGradient)"/>
+  
+  <!-- Bar 12 -->
+  <rect x="88.5" y="9" width="7" height="11" rx="0.3" fill="url(#barGradient)"/>
+</svg>
+

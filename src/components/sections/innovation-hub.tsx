@@ -2,6 +2,7 @@
 
 import React, { memo, useState } from "react";
 import { GraduationCap, Code2, Users2, Rocket, ArrowRight } from "lucide-react";
+import { ScrollReveal, StaggerContainer } from "@/components/ScrollReveal";
 
 interface InnovationHubItem {
   id: string;
@@ -54,29 +55,30 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
   return (
     <section className="py-16 sm:py-24 lg:py-32 relative bg-muted/30 dark:bg-[#050505] z-10" data-section="innovation-hub">
       <div className="container relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-16 lg:mb-20 gap-6 sm:gap-8">
-          <div className="max-w-2xl">
-            <span className="text-accent font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-4 sm:mb-6 block animate-fadeIn">
-              The Ecosystem
-            </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-foreground tracking-tighter animate-fadeIn">
-              Beyond Just <br />
-              <span className="text-muted-foreground">Software.</span>
-            </h2>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-16 lg:mb-20 gap-6 sm:gap-8">
+            <div className="max-w-2xl">
+              <span className="text-accent font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-4 sm:mb-6 block">
+                The Ecosystem
+              </span>
+              <h2 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-foreground tracking-tighter">
+                Beyond Just <br />
+                <span className="text-muted-foreground">Software.</span>
+              </h2>
+            </div>
+            <p className="text-sm sm:text-lg text-muted-foreground max-w-md leading-relaxed lg:mb-2">
+              Easyio is a talent-driven engine. We don't just build systems; we build the people who build the future.
+            </p>
           </div>
-          <p className="text-sm sm:text-lg text-muted-foreground max-w-md leading-relaxed lg:mb-2 animate-fadeIn">
-            Easyio is a talent-driven engine. We don't just build systems; we build the people who build the future.
-          </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
-          {displayedItems.map((item, index) => {
+        <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4" staggerDelay={0.15} direction="up">
+          {displayedItems.map((item) => {
             const Icon = IconMap[item.icon_type] || Rocket;
             return (
               <div
                 key={item.id}
-                style={{ animationDelay: `${index * 100}ms` }}
-                className="group relative p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-[2rem] bg-card dark:bg-white/[0.02] border-2 sm:border border-border/80 dark:border-white/25 sm:border-border/60 sm:dark:border-white/5 hover:bg-emerald-500/[0.03] dark:hover:bg-emerald-500/[0.03] hover:border-emerald-500/20 dark:hover:border-emerald-500/20 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-all duration-300 overflow-hidden animate-fadeIn backdrop-blur-sm"
+                className="group relative p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-[2rem] bg-card dark:bg-white/[0.02] border-2 sm:border border-border/80 dark:border-white/8 sm:border-border/60 sm:dark:border-white/5 hover:bg-emerald-500/[0.03] dark:hover:bg-emerald-500/[0.03] hover:border-emerald-500/20 dark:hover:border-emerald-500/20 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-all duration-300 overflow-hidden backdrop-blur-sm"
               >
                 <div className={`absolute top-0 right-0 p-4 sm:p-8 opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-[1.8] sm:group-hover:scale-[2] transition-all duration-700 ease-out text-emerald-500/40 group-hover:text-emerald-500/60 group-hover:-rotate-12 origin-top-right`}>
                   <Icon className="w-12 h-12 sm:w-16 sm:h-16" />
@@ -101,14 +103,15 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
               </div>
             );
           })}
-        </div>
+        </StaggerContainer>
 
         {hasMore && (
-          <div className="mt-10 sm:mt-16 flex justify-center">
-            <button 
-              onClick={handleToggleShowAll}
-              className="group relative px-8 sm:px-12 py-4 sm:py-5 bg-card dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl text-foreground font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-card/80 dark:hover:bg-white/10 hover:border-primary/20 dark:hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
-            >
+          <ScrollReveal direction="up" delay={0.3}>
+            <div className="mt-10 sm:mt-16 flex justify-center">
+              <button 
+                onClick={handleToggleShowAll}
+                className="group relative px-8 sm:px-12 py-4 sm:py-5 bg-card dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl text-foreground font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-card/80 dark:hover:bg-white/10 hover:border-primary/20 dark:hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
+              >
               <span className="relative z-10 flex items-center gap-2">
                 {showAll ? (
                   <>
@@ -122,9 +125,10 @@ const InnovationHub = memo(({ items = [] }: InnovationHubProps) => {
                   </>
                 )}
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
-          </div>
+                <span className="absolute inset-0 bg-gradient-to-r from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
+          </ScrollReveal>
         )}
       </div>
 

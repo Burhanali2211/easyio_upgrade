@@ -13,7 +13,7 @@ const CategoryFilter = memo(({ categories, activeCategory, onCategoryChange }: C
   if (categories.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 sm:mb-12">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 sm:mb-12 w-full overflow-x-hidden">
       <motion.button
         onClick={() => onCategoryChange(null)}
           className={`

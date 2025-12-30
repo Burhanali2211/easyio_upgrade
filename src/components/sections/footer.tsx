@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Github, Twitter, Linkedin } from 'lucide-react';
 import Logo from '@/components/ui/logo';
+import { ScrollReveal, StaggerContainer } from "@/components/ScrollReveal";
 
 type FooterLink = 
   | { name: string; href: string }
@@ -54,13 +55,15 @@ const Footer = () => {
   return (
     <footer className="relative w-full bg-background border-t border-border pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-12 z-30">
       <div className="container mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-12 mb-12 sm:mb-16 lg:mb-20">
-          <div className="col-span-2 md:col-span-1 flex flex-col gap-4 sm:gap-6">
-            <Logo className="scale-90 sm:scale-100 origin-left" />
-            <p className="text-xs sm:text-sm text-muted-foreground max-w-xs">
-              Architecting the underlying infrastructure of the modern digital economy. Engineering for scale, performance, and impact.
-            </p>
-          </div>
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-12 mb-12 sm:mb-16 lg:mb-20" staggerDelay={0.1} direction="up">
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="col-span-2 md:col-span-1 flex flex-col gap-4 sm:gap-6">
+              <Logo className="scale-90 sm:scale-100 origin-left" />
+              <p className="text-xs sm:text-sm text-muted-foreground max-w-xs">
+                Architecting the underlying infrastructure of the modern digital economy. Engineering for scale, performance, and impact.
+              </p>
+            </div>
+          </ScrollReveal>
 
           {footerLinks.map((group) => (
             <div key={group.title} className="flex flex-col gap-4 sm:gap-6">
@@ -101,9 +104,10 @@ const Footer = () => {
               </ul>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
 
-          <div className="pt-6 sm:pt-8 border-t border-border dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="pt-6 sm:pt-8 border-t border-border dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
               <p className="text-[10px] sm:text-xs text-muted-foreground font-mono uppercase tracking-wider">
                 © {currentYear} EASYIO TECHNOLOGIES
@@ -126,7 +130,8 @@ const Footer = () => {
               System Status: Optimal
             </span>
           </div>
-        </div>
+            </div>
+          </ScrollReveal>
       </div>
     </footer>
   );

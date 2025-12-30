@@ -8,7 +8,8 @@ const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Max-Age': '86400',
+  'Access-Control-Max-Age': '86400', // Cache preflight for 24 hours
+  'Vary': 'Origin', // Important for proper caching
 };
 
 // Direct PostgreSQL connection using pooler (works for simple queries)
@@ -100,9 +101,15 @@ async function ensureTableExists(client: Client) {
   }
 }
 
-// Handle CORS preflight requests
+// Handle CORS preflight requests - return 204 No Content for efficiency
 export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders });
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      ...corsHeaders,
+      'Content-Length': '0',
+    },
+  });
 }
 
 // GET - Fetch all website settings using direct SQL (bypasses PostgREST schema cache)

@@ -3,6 +3,7 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
 import { Star, Quote } from 'lucide-react';
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 interface Testimonial {
   id: string;
@@ -28,27 +29,29 @@ const Testimonials = memo(({ testimonials = [] }: TestimonialsProps) => {
       </div>
       
       <div className="container mx-auto mb-12 sm:mb-16 lg:mb-20 relative">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div>
-            <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 block animate-fadeIn">
-              Validation
-            </span>
-            <h2 className="text-foreground text-2xl sm:text-4xl lg:text-5xl animate-fadeIn">
-              Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/60 dark:from-white dark:to-white/60">Global Visionaries</span>
-            </h2>
-          </div>
-          <div className="flex items-center gap-6 animate-fadeIn">
-            <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-black text-foreground">50+</p>
-              <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono">Enterprises</p>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+              <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 block">
+                Validation
+              </span>
+              <h2 className="text-foreground text-2xl sm:text-4xl lg:text-5xl">
+                Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/60 dark:from-white dark:to-white/60">Global Visionaries</span>
+              </h2>
             </div>
-            <div className="w-[1px] h-10 bg-border dark:bg-white/10" />
-            <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-black text-foreground">4.9</p>
-              <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono">Avg Rating</p>
+            <div className="flex items-center gap-6">
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-black text-foreground">50+</p>
+                <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono">Enterprises</p>
+              </div>
+              <div className="w-[1px] h-10 bg-border dark:bg-white/10" />
+              <div className="text-center">
+                <p className="text-2xl sm:text-3xl font-black text-foreground">4.9</p>
+                <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono">Avg Rating</p>
+              </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
 
       <div className="relative flex overflow-hidden group">
@@ -59,7 +62,7 @@ const Testimonials = memo(({ testimonials = [] }: TestimonialsProps) => {
           {duplicatedTestimonials.map((testimonial, idx) => (
             <div 
               key={`${testimonial.id}-${idx}`}
-              className="group/card inline-flex flex-col w-[280px] sm:w-[400px] lg:w-[450px] mx-2 sm:mx-3 p-6 sm:p-8 bg-card dark:bg-[#050508] border-2 sm:border border-border/80 dark:border-white/30 sm:border-border/60 sm:dark:border-white/10 rounded-2xl whitespace-normal hover:border-primary/20 dark:hover:border-white/10 transition-all relative overflow-hidden flex-shrink-0"
+              className="group/card inline-flex flex-col w-[280px] sm:w-[400px] lg:w-[450px] mx-2 sm:mx-3 p-6 sm:p-8 bg-card dark:bg-[#050508] border-2 sm:border border-border/80 dark:border-white/8 sm:border-border/60 sm:dark:border-white/10 rounded-2xl whitespace-normal hover:border-primary/20 dark:hover:border-white/10 transition-all relative overflow-hidden flex-shrink-0"
             >
               <div className="absolute top-6 right-6 text-foreground/5 dark:text-white/5 group-hover/card:text-foreground/10 dark:group-hover/card:text-white/10 transition-colors">
                 <Quote size={40} />

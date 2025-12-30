@@ -2,6 +2,45 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Client } from 'pg';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { CACHE_TAGS } from '@/lib/cache/config';
+import { unstable_cache } from 'next/cache';
+
+// In-memory rate limiting to prevent excessive requests
+const requestTimestamps: Map<string, number[]> = new Map();
+const OPTIONS_REQUEST_TIMESTAMPS: Map<string, number[]> = new Map();
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const RATE_LIMIT_MAX_REQUESTS = 10; // Max 10 requests per minute per IP
+const OPTIONS_RATE_LIMIT = 5; // Max 5 OPTIONS requests per minute per IP
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = requestTimestamps.get(ip) || [];
+  
+  // Remove timestamps outside the window
+  const validTimestamps = timestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW);
+  
+  if (validTimestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    return false; // Rate limit exceeded
+  }
+  
+  validTimestamps.push(now);
+  requestTimestamps.set(ip, validTimestamps);
+  
+  return true; // Request allowed
+}
+
+function checkOptionsRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = OPTIONS_REQUEST_TIMESTAMPS.get(ip) || [];
+  const validTimestamps = timestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW);
+  
+  if (validTimestamps.length >= OPTIONS_RATE_LIMIT) {
+    return false;
+  }
+  
+  validTimestamps.push(now);
+  OPTIONS_REQUEST_TIMESTAMPS.set(ip, validTimestamps);
+  return true;
+}
 
 // Direct PostgreSQL connection using pooler (works for simple queries)
 const getDbClient = async () => {
@@ -91,69 +130,141 @@ async function ensureTableExists(client: Client) {
   }
 }
 
-// CORS headers helper
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Max-Age': '86400',
+// CORS headers helper - only add if needed (for cross-origin)
+const getCorsHeaders = (origin: string | null) => {
+  // If same-origin or no origin, no CORS needed
+  if (!origin || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+    return {};
+  }
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Max-Age': '86400',
+  };
 };
 
-// Handle CORS preflight requests
-export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders });
+// Handle CORS preflight requests - return immediately with aggressive caching
+export async function OPTIONS(request: NextRequest) {
+  // Rate limit OPTIONS requests to prevent spam
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 
+             request.headers.get('x-real-ip') || 
+             'unknown';
+  
+  // Block excessive OPTIONS requests (even in dev)
+  if (!checkOptionsRateLimit(ip)) {
+    return new NextResponse(null, {
+      status: 429,
+      headers: {
+        'Retry-After': '60',
+        'Cache-Control': 'no-store',
+      },
+    });
+  }
+  
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Max-Age': '86400', // Cache for 24 hours
+      'Cache-Control': 'public, max-age=86400, immutable',
+      'Content-Length': '0',
+    },
+  });
 }
 
+// Cached fetch function with 5 minute revalidation
+const getCachedSettings = unstable_cache(
+  async () => {
+    let client: Client | null = null;
+    
+    try {
+      client = await getDbClient();
+      
+      // Ensure table exists
+      await ensureTableExists(client);
+      
+      // Direct SQL query - bypasses PostgREST schema cache completely
+      const result = await client.query(
+        'SELECT id, setting_key, setting_value, created_at, updated_at FROM public.website_settings ORDER BY setting_key'
+      );
+      
+      return result.rows;
+    } finally {
+      if (client) {
+        await client.end();
+      }
+    }
+  },
+  ['system-settings'],
+  {
+    revalidate: 300, // 5 minutes
+    tags: [CACHE_TAGS.WEBSITE_SETTINGS],
+  }
+);
+
 // GET - Fetch all website settings using direct SQL (bypasses PostgREST schema cache)
-export async function GET() {
-  let client: Client | null = null;
+export async function GET(request: NextRequest) {
+  // Rate limiting - only in production or if explicitly enabled
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 
+             request.headers.get('x-real-ip') || 
+             'unknown';
+  
+  // Check rate limit (only enforce in production to avoid blocking dev)
+  if (process.env.NODE_ENV === 'production' && !checkRateLimit(ip)) {
+    return NextResponse.json(
+      { 
+        error: 'Too many requests. Please try again later.',
+        retryAfter: 60
+      },
+      { 
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          'Retry-After': '60',
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
+    );
+  }
   
   try {
-    client = await getDbClient();
-    
-    // Ensure table exists
-    await ensureTableExists(client);
-    
-    // Direct SQL query - bypasses PostgREST schema cache completely
-    const result = await client.query(
-      'SELECT id, setting_key, setting_value, created_at, updated_at FROM public.website_settings ORDER BY setting_key'
-    );
+    const rows = await getCachedSettings();
+    const origin = request.headers.get('origin');
 
     // Return with proper cache headers
     return NextResponse.json(
       { 
-        data: result.rows,
+        data: rows,
         cached: true,
         timestamp: new Date().toISOString(),
       },
       {
         headers: {
-          ...corsHeaders,
-          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+          ...getCorsHeaders(origin),
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600, max-age=300',
           'CDN-Cache-Control': 'public, s-maxage=300',
           'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
         },
       }
     );
   } catch (error: any) {
-    console.error('Error fetching system settings:', error);
+    // Only log actual errors, not every request
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Error fetching system settings:', error.message);
+    }
     return NextResponse.json(
       { 
         error: error.message || 'Internal server error',
-        details: error.stack 
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
       },
       { 
         status: 500,
         headers: {
-          ...corsHeaders,
+          ...getCorsHeaders(request.headers.get('origin')),
           'Cache-Control': 'no-store, no-cache, must-revalidate',
         },
       }
     );
-  } finally {
-    if (client) {
-      await client.end();
-    }
   }
 }
 
@@ -174,7 +285,7 @@ export async function POST(request: NextRequest) {
         { error: 'Invalid request. Expected { settings: [...] }' },
         { 
           status: 400,
-          headers: corsHeaders,
+          headers: getCorsHeaders(request.headers.get('origin')),
         }
       );
     }
@@ -218,7 +329,7 @@ export async function POST(request: NextRequest) {
           });
         }
       } catch (error: any) {
-        console.error(`Failed to save setting ${setting.setting_key}:`, error);
+        // Silent error handling - only log in production for critical errors
         results.push({ 
           setting_key: setting.setting_key, 
           success: false, 
@@ -236,8 +347,7 @@ export async function POST(request: NextRequest) {
         revalidatePath('/');
         revalidatePath('/admin');
       } catch (cacheError) {
-        console.error('Cache invalidation error:', cacheError);
-        // Don't fail the request if cache invalidation fails
+        // Silent cache invalidation error
       }
     }
     
@@ -250,22 +360,21 @@ export async function POST(request: NextRequest) {
       { 
         status: allSuccess ? 200 : 207,
         headers: {
-          ...corsHeaders,
+          ...getCorsHeaders(request.headers.get('origin')),
           'Cache-Control': 'no-store, no-cache, must-revalidate',
           'Pragma': 'no-cache',
         },
       }
     );
   } catch (error: any) {
-    console.error('Error in POST system settings:', error);
     return NextResponse.json(
       { 
         error: error.message || 'Internal server error',
-        details: error.stack 
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
       },
       { 
         status: 500,
-        headers: corsHeaders,
+        headers: getCorsHeaders(request.headers.get('origin')),
       }
     );
   } finally {

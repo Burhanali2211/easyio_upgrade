@@ -2,6 +2,7 @@
 
 import React, { memo, useEffect, useState, useRef } from "react";
 import { Activity, Globe, Server, Shield } from "lucide-react";
+import { StaggerContainer } from "@/components/ScrollReveal";
 
 interface Metric {
   id: string;
@@ -192,7 +193,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
 
   // Get visualization type based on index
   const getVisualizationType = (index: number): string => {
-    const types = ['bar', 'line', 'area', 'donut', 'progress', 'line'];
+    const types = ['bar', 'line', 'area', 'bar', 'progress', 'line'];
     return types[index % types.length];
   };
 
@@ -200,23 +201,42 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
   const renderBarChart = (metricId: string, colorScheme: typeof colorSchemes[0], index: number) => {
     const heights = barHeights[metricId] || Array(12).fill(50);
     return (
-      <div className="flex items-end gap-[2px] h-8 sm:h-10 w-full overflow-hidden opacity-60 group-hover:opacity-90 transition-opacity" style={{ 
+      <div className="h-8 sm:h-10 w-full overflow-hidden opacity-60 group-hover:opacity-90 transition-opacity" style={{ 
         animation: 'fadeInUp 0.8s ease-out forwards',
         animationDelay: `${index * 100 + 300}ms`
       }}>
-        {heights.map((height, i) => (
-          <div
-            key={i}
-            className={`flex-1 bg-gradient-to-t ${colorScheme.primary} rounded-t-[2px]`}
-            style={{ 
-              height: '0%',
-              animation: 'growBar 0.8s ease-out forwards',
-              animationDelay: `${index * 100 + 400 + i * 30}ms`,
-              animationFillMode: 'forwards',
-              '--target-height': `${height}%`
-            } as React.CSSProperties & { '--target-height': string }}
-          />
-        ))}
+        <svg viewBox="0 0 100 20" className="w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id={`barGradient-${metricId}`} x1="0%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor={colorScheme.svgGradient[1]} stopOpacity="0.9" />
+              <stop offset="50%" stopColor={colorScheme.svgGradient[0]} stopOpacity="0.85" />
+              <stop offset="100%" stopColor={colorScheme.svgColorDark} stopOpacity="0.8" />
+            </linearGradient>
+          </defs>
+          {heights.map((height, i) => {
+            const barWidth = 100 / heights.length;
+            const barX = (i * barWidth) + (barWidth * 0.1);
+            const barW = barWidth * 0.8;
+            const normalizedHeight = (height / 100) * 20;
+            const barY = 20 - normalizedHeight;
+            return (
+              <rect
+                key={i}
+                x={barX}
+                y={barY}
+                width={barW}
+                height={normalizedHeight}
+                rx="0.3"
+                fill={`url(#barGradient-${metricId})`}
+                style={{
+                  opacity: 0,
+                  animation: 'fadeIn 0.3s ease-out forwards',
+                  animationDelay: `${index * 100 + 400 + i * 30}ms`
+                }}
+              />
+            );
+          })}
+        </svg>
       </div>
     );
   };
@@ -309,57 +329,75 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
     );
   };
 
-  // Render Donut Chart
-  const renderDonutChart = (metricId: string, colorScheme: typeof colorSchemes[0], index: number) => {
-    const segments = donutData[metricId] || [25, 25, 25, 25];
-    const total = segments.reduce((a, b) => a + b, 0);
-    const radius = 35;
-    const circumference = 2 * Math.PI * radius;
-    const segmentColors = [
-      colorScheme.svgGradient[0],
-      colorScheme.svgGradient[1],
-      colorScheme.svgGradient[0],
-      colorScheme.svgGradient[1],
-    ];
+  // Render Wave Chart
+  const renderWaveChart = (metricId: string, colorScheme: typeof colorSchemes[0], index: number) => {
+    const points = lineData[metricId] || Array(24).fill(50);
+    const maxValue = Math.max(...points);
+    const minValue = Math.min(...points);
+    const range = maxValue - minValue || 1;
     
-    let cumulativePercent = 0;
+    // Create smooth wave path with proper continuity
+    const pathPoints = points.map((val, i) => {
+      const x = (i / (points.length - 1)) * 100;
+      const normalizedVal = (val - minValue) / range;
+      const y = 100 - (normalizedVal * 75 + 12.5); // 12.5% padding top and bottom
+      return { x, y, val };
+    });
+    
+    // Build path ensuring continuity
+    const wavePath = pathPoints.map((point, i) => {
+      if (i === 0) {
+        return `M ${point.x} ${point.y}`;
+      }
+      return `L ${point.x} ${point.y}`;
+    }).join(' ');
+    
+    // Calculate path length for animation
+    const wavePathLength = points.length * 4;
     
     return (
-      <div className="h-8 sm:h-10 w-full flex items-center justify-center opacity-60 group-hover:opacity-90 transition-opacity" style={{ 
+      <div className="h-8 sm:h-10 w-full overflow-hidden opacity-60 group-hover:opacity-90 transition-opacity" style={{ 
         animation: 'fadeInUp 0.8s ease-out forwards',
         animationDelay: `${index * 100 + 300}ms`
       }}>
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          {segments.map((value, i) => {
-            const percentage = (value / total) * 100;
-            const strokeLength = (percentage / 100) * circumference;
-            const strokeDasharray = `${strokeLength} ${circumference}`;
-            const rotation = -90 + (cumulativePercent / 100) * 360;
-            const dashOffset = circumference - (cumulativePercent / 100) * circumference;
-            cumulativePercent += percentage;
-            
-            return (
-              <circle
-                key={i}
-                cx="50"
-                cy="50"
-                r={radius}
-                fill="none"
-                stroke={segmentColors[i % segmentColors.length]}
-                strokeWidth="10"
-                strokeDasharray={strokeDasharray}
-                strokeDashoffset={circumference}
-                strokeLinecap="round"
-                opacity={0.85 + (i * 0.04)}
-                transform={`rotate(${rotation} 50 50)`}
-                style={{ 
-                  transformOrigin: '50% 50%',
-                  animation: 'drawDonutSegment 1s ease-out forwards',
-                  animationDelay: `${index * 100 + 400 + i * 120}ms`,
-                  '--target-offset': `${dashOffset}`
-                } as React.CSSProperties & { '--target-offset': string }}
-              />
-            );
+        <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
+          {/* Wave line */}
+          <path
+            d={wavePath}
+            fill="none"
+            stroke={colorScheme.svgGradient[0]}
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray={wavePathLength}
+            strokeDashoffset={wavePathLength}
+            style={{
+              animation: 'drawLine 1.5s ease-out forwards',
+              animationDelay: `${index * 100 + 400}ms`
+            }}
+          />
+          {/* Data point dots */}
+          {pathPoints.map((point, i) => {
+            // Show dots at regular intervals or at all points
+            if (i % 3 === 0 || i === pathPoints.length - 1) {
+              return (
+                <circle
+                  key={i}
+                  cx={point.x}
+                  cy={point.y}
+                  r="0"
+                  fill={colorScheme.svgGradient[0]}
+                  stroke={colorScheme.svgGradient[1]}
+                  strokeWidth="1"
+                  opacity="0.9"
+                  style={{
+                    animation: 'popIn 0.4s ease-out forwards',
+                    animationDelay: `${index * 100 + 600 + (i / 3) * 80}ms`
+                  }}
+                />
+              );
+            }
+            return null;
           })}
         </svg>
       </div>
@@ -407,8 +445,8 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
         return renderLineChart(metricId, colorScheme, index);
       case 'area':
         return renderAreaChart(metricId, colorScheme, index);
-      case 'donut':
-        return renderDonutChart(metricId, colorScheme, index);
+      case 'wave':
+        return renderWaveChart(metricId, colorScheme, index);
       case 'progress':
         return renderProgressBar(metricId, colorScheme, index);
       default:
@@ -417,9 +455,9 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
   };
 
   return (
-    <section className="py-16 sm:py-24 relative overflow-hidden bg-background z-10">
+    <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 relative overflow-hidden bg-background z-10">
       <div className="container relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" staggerDelay={0.1} direction="scale">
           {metrics.map((metric, index) => {
             const Icon = IconMap[metric.icon_type] || Globe;
             const displayValue = animatedValues[metric.id] || metric.value;
@@ -429,8 +467,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
             return (
               <div
                 key={metric.id}
-                style={{ animationDelay: `${index * 100}ms` }}
-                className={`group obsidian-card p-5 sm:p-6 rounded-2xl border ${colorScheme.border} ${colorScheme.borderHover} relative overflow-hidden animate-fadeIn transition-all duration-200 ${colorScheme.bg}`}
+                className={`group obsidian-card p-5 sm:p-6 rounded-2xl border ${colorScheme.border} ${colorScheme.borderHover} relative overflow-hidden transition-all duration-200 ${colorScheme.bg}`}
               >
                 <div className="relative z-10">
                   {/* Icon */}
@@ -459,7 +496,7 @@ const MetricsVisualization = memo(({ metrics = [] }: MetricsProps) => {
               </div>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 blur-[80px] rounded-full opacity-30 pointer-events-none" />

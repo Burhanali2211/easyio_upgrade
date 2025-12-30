@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import ProjectCard from './our-work/ProjectCard';
 import ProjectModal from './our-work/ProjectModal';
 import { Project } from './our-work/types';
+import { ScrollReveal, StaggerContainer } from "@/components/ScrollReveal";
 
 interface OurWorkProps {
   projects?: Project[];
@@ -33,39 +34,37 @@ const OurWork = memo(({ projects = [] }: OurWorkProps) => {
   return (
     <section id="our-work" className="py-16 sm:py-24 bg-background relative z-10">
       <div className="container">
-        <div className="flex flex-col mb-10 sm:mb-16">
-          <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 animate-fadeIn">
-            Portfolio
-          </span>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl mb-4 sm:mb-8 animate-fadeIn">
-            Engineering <span className="text-foreground">Success Stories</span>
-          </h2>
-          <p className="max-w-2xl text-muted-foreground text-sm sm:text-lg animate-fadeIn">
-            We don&apos;t just build websites; we architect complex digital systems that power businesses at scale.
-          </p>
-        </div>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="flex flex-col mb-10 sm:mb-16">
+            <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4">
+              Portfolio
+            </span>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl mb-4 sm:mb-8">
+              Engineering <span className="text-foreground">Success Stories</span>
+            </h2>
+            <p className="max-w-2xl text-muted-foreground text-sm sm:text-lg">
+              We don&apos;t just build websites; we architect complex digital systems that power businesses at scale.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 transition-all duration-500">
-          {displayedProjects.map((project, index) => (
-            <div 
-              key={project.id} 
-              style={{ animationDelay: `${index * 100}ms` }}
-              className="animate-fadeIn"
-            >
-              <ProjectCard 
-                project={project} 
-                onClick={() => setSelectedProject(project)}
-              />
-            </div>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 transition-all duration-500" staggerDelay={0.15} direction="up">
+          {displayedProjects.map((project) => (
+            <ProjectCard 
+              key={project.id}
+              project={project} 
+              onClick={() => setSelectedProject(project)}
+            />
           ))}
-        </div>
+        </StaggerContainer>
         
         {hasMore && (
-          <div className="mt-10 sm:mt-16 flex justify-center">
-            <button 
-              onClick={handleToggleShowAll}
-              className="group relative px-8 sm:px-12 py-4 sm:py-5 bg-muted dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl text-foreground font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-muted/80 dark:hover:bg-white/10 hover:border-primary/20 dark:hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
-            >
+          <ScrollReveal direction="up" delay={0.3}>
+            <div className="mt-10 sm:mt-16 flex justify-center">
+              <button 
+                onClick={handleToggleShowAll}
+                className="group relative px-8 sm:px-12 py-4 sm:py-5 bg-muted dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl text-foreground font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-muted/80 dark:hover:bg-white/10 hover:border-primary/20 dark:hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
+              >
               <span className="relative z-10 flex items-center gap-2">
                 {showAll ? (
                   <>
@@ -79,9 +78,10 @@ const OurWork = memo(({ projects = [] }: OurWorkProps) => {
                   </>
                 )}
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
-          </div>
+                <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
+          </ScrollReveal>
         )}
       </div>
       

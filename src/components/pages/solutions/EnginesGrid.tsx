@@ -139,7 +139,7 @@ export default function EnginesGrid({
 
       {/* Dynamic Grid Layout */}
       {filteredEngines.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 auto-rows-fr w-full overflow-x-hidden">
           {filteredEngines.map((engine, index) => {
             // Determine card size based on priority
             const isFeatured = (engine.priority || 0) > 0;
@@ -148,7 +148,7 @@ export default function EnginesGrid({
             return (
               <div
                 key={engine.id}
-                className={isFeatured ? 'md:col-span-2 lg:col-span-2' : ''}
+                className={`${isFeatured ? 'md:col-span-2 lg:col-span-2' : ''} w-full min-w-0`}
               >
                 <EngineCard 
                   engine={engine} 

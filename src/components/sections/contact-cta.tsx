@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Handshake, Terminal } from 'lucide-react';
+import { ScrollReveal, StaggerContainer } from "@/components/ScrollReveal";
 
 const ContactCTA = () => {
   return (
@@ -13,23 +14,26 @@ const ContactCTA = () => {
       </div>
       
       <div className="container mx-auto max-w-[1440px] relative">
-        <div className="mb-12 sm:mb-16 lg:mb-20 max-w-[800px]">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted dark:bg-white/[0.03] border border-border dark:border-white/10 mb-6">
-            <Terminal size={14} className="text-primary" />
-            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Open Channel</span>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="mb-12 sm:mb-16 lg:mb-20 max-w-[800px]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted dark:bg-white/[0.03] border border-border dark:border-white/10 mb-6">
+              <Terminal size={14} className="text-primary" />
+              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Open Channel</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6">
+              Let&apos;s Work Together
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-[650px] leading-relaxed">
+              We&apos;re open to collaborations and sponsorships, as well as enterprise engineering work opportunities. With our experience in systems architecture, distributed computing, and business automation, we&apos;re ready to bring your project to life.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6">
-            Let&apos;s Work Together
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-[650px] leading-relaxed">
-            We&apos;re open to collaborations and sponsorships, as well as enterprise engineering work opportunities. With our experience in systems architecture, distributed computing, and business automation, we&apos;re ready to bring your project to life.
-          </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 border-2 sm:border border-border/80 dark:border-white/30 sm:border-border/60 sm:dark:border-white/10 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-fr border-2 sm:border border-border/80 dark:border-white/8 sm:border-border/60 sm:dark:border-white/10 rounded-2xl overflow-hidden">
+          <ScrollReveal direction="up" delay={0.15} className="h-full">
             <Link 
               href="/contact?type=collaboration"
-              className="group relative flex flex-col justify-between p-8 sm:p-12 min-h-[280px] sm:min-h-[350px] border-b-2 md:border-b-0 md:border-r-2 md:border-r border-border/80 dark:border-white/30 sm:border-border/60 sm:dark:border-white/10 transition-all duration-500 hover:bg-muted dark:hover:bg-white/[0.02] overflow-hidden"
+              className="group relative flex flex-col justify-between p-8 sm:p-12 h-full min-h-[280px] sm:min-h-[350px] border-b-2 md:border-b-0 md:border-r-2 md:border-r border-border/80 dark:border-white/8 sm:border-border/60 sm:dark:border-white/10 transition-all duration-500 hover:bg-muted dark:hover:bg-white/[0.02] overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute top-0 right-0 p-4 sm:p-6 opacity-0 group-hover:opacity-[0.03] group-hover:scale-[1.5] sm:group-hover:scale-[1.8] transition-all duration-700 ease-out text-primary -rotate-12 group-hover:rotate-0 pointer-events-none origin-top-right">
@@ -52,10 +56,12 @@ const ContactCTA = () => {
               </h3>
             </div>
           </Link>
+          </ScrollReveal>
 
+          <ScrollReveal direction="up" delay={0.3} className="h-full">
             <Link 
               href="/contact?type=enterprise"
-              className="group relative flex flex-col justify-between p-8 sm:p-12 min-h-[280px] sm:min-h-[350px] transition-all duration-500 hover:bg-muted dark:hover:bg-white/[0.02] overflow-hidden"
+              className="group relative flex flex-col justify-between p-8 sm:p-12 h-full min-h-[280px] sm:min-h-[350px] transition-all duration-500 hover:bg-muted dark:hover:bg-white/[0.02] overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute top-0 right-0 p-4 sm:p-6 opacity-0 group-hover:opacity-[0.03] group-hover:scale-[1.5] sm:group-hover:scale-[1.8] transition-all duration-700 ease-out text-accent -rotate-12 group-hover:rotate-0 pointer-events-none origin-top-right">
@@ -78,9 +84,11 @@ const ContactCTA = () => {
               </h3>
             </div>
           </Link>
+          </ScrollReveal>
         </div>
 
-        <div className="mt-16 sm:mt-20 lg:mt-24 pt-8 sm:pt-10 border-t-2 sm:border-t border-border/60 dark:border-white/20 sm:border-border sm:dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10">
+        <ScrollReveal direction="up" delay={0.3}>
+          <div className="mt-16 sm:mt-20 lg:mt-24 pt-8 sm:pt-10 border-t-2 sm:border-t border-border/60 dark:border-white/8 sm:border-border sm:dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10">
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 sm:gap-x-10">
             {['Instagram', 'LinkedIn', 'Twitter', 'GitHub'].map((social) => (
               <a 
@@ -99,7 +107,8 @@ const ContactCTA = () => {
           <div className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest text-center">
             © {new Date().getFullYear()} Easyio Technologies
           </div>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

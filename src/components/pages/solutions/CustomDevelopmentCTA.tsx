@@ -106,7 +106,7 @@ export default function CustomDevelopmentCTA() {
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      className="mt-16 sm:mt-24 lg:mt-32 relative overflow-hidden rounded-2xl sm:rounded-[3rem] bg-card dark:bg-[#050505] border border-border dark:border-white/5 p-8 sm:p-12 lg:p-20"
+      className="mt-16 sm:mt-24 lg:mt-32 relative overflow-hidden rounded-2xl sm:rounded-[3rem] bg-card dark:bg-[#050505] border border-border dark:border-white/5 p-8 sm:p-12 lg:p-20 w-full max-w-full"
     >
       <div className="absolute inset-0 grid-command opacity-20" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 blur-[100px] rounded-full animate-pulse" />

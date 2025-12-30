@@ -16,16 +16,16 @@ export default function SolutionsPage() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navigation />
       
-      <main className="lg:pl-[288px] relative pt-16 lg:pt-0">
+      <main className="lg:pl-[288px] relative pt-16 lg:pt-0 overflow-x-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/5 blur-[120px] rounded-full" />
           <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-primary/5 blur-[100px] rounded-full" />
         </div>
         
-        <div className="container pt-8 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 relative z-10">
+        <div className="container pt-8 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 relative z-10 max-w-full overflow-x-hidden">
           <SolutionsHero />
           
           <EnginesGrid 

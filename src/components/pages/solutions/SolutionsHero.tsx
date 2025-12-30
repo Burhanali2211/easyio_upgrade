@@ -16,14 +16,14 @@ export default function SolutionsHero() {
         <span className="text-[10px] font-mono text-primary uppercase tracking-widest">Logic Engines</span>
       </div>
       
-      <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight">
+      <h1 className="text-foreground dark:text-white mb-6 sm:mb-8 text-3xl sm:text-5xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight break-words">
         SYSTEM <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/30">
           ARCHITECTURES.
         </span>
       </h1>
       
-      <p className="max-w-2xl text-muted-foreground text-base sm:text-xl leading-relaxed font-medium mb-8">
+      <p className="max-w-2xl text-muted-foreground text-base sm:text-xl leading-relaxed font-medium mb-8 break-words overflow-wrap-anywhere">
         We don&apos;t just write code; we engineer digital life-forms. Our logic engines are the heart of the most advanced systems in the world.
       </p>
 

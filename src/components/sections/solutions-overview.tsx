@@ -3,6 +3,7 @@
 import React, { memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Database, Terminal, Cpu, Network, Zap, ChevronRight, ArrowRight } from "lucide-react";
+import { ScrollReveal, StaggerContainer } from "@/components/ScrollReveal";
 
 interface HomeSolution {
   id: string;
@@ -47,12 +48,9 @@ const SolutionCard = memo(({ solution, index, Icon, colors }: SolutionCardProps)
   };
 
   return (
-    <div
-      style={{ animationDelay: `${index * 100}ms` }}
-      className="group relative animate-fadeIn overflow-hidden"
-    >
+    <div className="group relative overflow-hidden">
       {/* Base layer with border hover effect only */}
-      <div className="absolute inset-0 rounded-2xl sm:rounded-[2.5rem] border-2 sm:border border-border/80 dark:border-white/30 sm:border-border/60 sm:dark:border-white/10 bg-card dark:bg-white/[0.01] group-hover:border-primary/50 dark:group-hover:border-white/30 sm:group-hover:border-primary/30 sm:dark:group-hover:border-white/25 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-all duration-500 ease-out" />
+      <div className="absolute inset-0 rounded-2xl sm:rounded-[2.5rem] border-2 sm:border border-border/80 dark:border-white/8 sm:border-border/60 sm:dark:border-white/10 bg-card dark:bg-white/[0.01] group-hover:border-primary/50 dark:group-hover:border-white/15 sm:group-hover:border-primary/30 sm:dark:group-hover:border-white/25 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-all duration-500 ease-out" />
       
         <div className="relative p-6 sm:p-8 lg:p-12 flex flex-col h-full z-10 overflow-hidden">
           <div className={`absolute top-0 right-0 p-4 sm:p-6 opacity-0 group-hover:opacity-[0.03] group-hover:scale-[1.5] sm:group-hover:scale-[1.8] transition-all duration-700 ease-out ${colors.icon} -rotate-12 group-hover:rotate-0 pointer-events-none origin-top-right`}>
@@ -124,23 +122,25 @@ const SolutionsOverview = memo(({ solutions = [] }: SolutionsProps) => {
   };
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 bg-background relative overflow-hidden z-10" data-section="solutions">
+    <section className="pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 lg:pb-32 bg-background relative overflow-hidden z-10" data-section="solutions">
       <div className="container relative z-10">
-        <div className="flex flex-col mb-12 sm:mb-16 lg:mb-24">
-          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 animate-fadeIn">
-            <div className="w-8 sm:w-12 h-[1px] bg-primary" />
-            <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em]">
-              The Protocol
-            </span>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="flex flex-col mb-12 sm:mb-16 lg:mb-24">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <div className="w-8 sm:w-12 h-[1px] bg-primary" />
+              <span className="text-primary font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em]">
+                The Protocol
+              </span>
+            </div>
+            
+            <h2 className="text-[clamp(2rem,10vw,3.5rem)] sm:text-5xl lg:text-8xl font-display font-bold text-foreground tracking-tighter max-w-4xl">
+              Universal <span className="text-foreground/40 dark:text-white/20">Business</span> <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/40 dark:from-white dark:to-white/40">Infrastructure.</span>
+            </h2>
           </div>
-          
-          <h2 className="text-[clamp(2rem,10vw,3.5rem)] sm:text-5xl lg:text-8xl font-display font-bold text-foreground tracking-tighter max-w-4xl animate-fadeIn">
-            Universal <span className="text-foreground/40 dark:text-white/20">Business</span> <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/40 dark:from-white dark:to-white/40">Infrastructure.</span>
-          </h2>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
+        <StaggerContainer className="grid md:grid-cols-2 gap-3 sm:gap-4" staggerDelay={0.15} direction="up">
           {displayedSolutions.map((solution, index) => {
             const Icon = IconMap[solution.icon_type] || Database;
             const colors = IconColors[solution.icon_type] || IconColors.database;
@@ -154,14 +154,15 @@ const SolutionsOverview = memo(({ solutions = [] }: SolutionsProps) => {
               />
             );
           })}
-        </div>
+        </StaggerContainer>
 
         {hasMore && (
-          <div className="mt-10 sm:mt-16 flex justify-center">
-            <button 
-              onClick={handleToggleShowAll}
-              className="group relative px-8 sm:px-12 py-4 sm:py-5 bg-muted dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl text-foreground font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-muted/80 dark:hover:bg-white/10 hover:border-primary/20 dark:hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
-            >
+          <ScrollReveal direction="up" delay={0.3}>
+            <div className="mt-10 sm:mt-16 flex justify-center">
+              <button 
+                onClick={handleToggleShowAll}
+                className="group relative px-8 sm:px-12 py-4 sm:py-5 bg-muted dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl text-foreground font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-muted/80 dark:hover:bg-white/10 hover:border-primary/20 dark:hover:border-white/20 hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden"
+              >
               <span className="relative z-10 flex items-center gap-2">
                 {showAll ? (
                   <>
@@ -175,9 +176,10 @@ const SolutionsOverview = memo(({ solutions = [] }: SolutionsProps) => {
                   </>
                 )}
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
-          </div>
+                <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
+          </ScrollReveal>
         )}
       </div>
       

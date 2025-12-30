@@ -3,6 +3,7 @@
 import React, { memo, useMemo } from 'react';
 import { Building2 } from 'lucide-react';
 import Image from 'next/image';
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 interface Partner {
   id: string;
@@ -20,14 +21,16 @@ const Collaborators = memo(({ partners = [] }: CollaboratorsProps) => {
   return (
     <section className="relative w-full bg-background py-10 sm:py-16 overflow-hidden border-y border-border z-10">
       <div className="container mx-auto relative z-10 mb-6 sm:mb-8">
-        <div className="text-center lg:text-left">
-          <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-primary mb-2 block">
-            Ecosystem Partners
-          </span>
-          <h2 className="text-lg sm:text-xl font-display font-bold text-foreground">
-            Trusted by Industry Leaders
-          </h2>
-        </div>
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="text-center lg:text-left">
+            <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-primary mb-2 block">
+              Ecosystem Partners
+            </span>
+            <h2 className="text-lg sm:text-xl font-display font-bold text-foreground">
+              Trusted by Industry Leaders
+            </h2>
+          </div>
+        </ScrollReveal>
       </div>
 
       <div className="relative w-full overflow-hidden">

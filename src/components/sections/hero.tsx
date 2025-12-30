@@ -60,11 +60,11 @@ const HeroSection = memo(() => {
       </div>
 
       {/* Scrollable Content Layer */}
-      <div className="relative z-20 w-full min-h-0 sm:min-h-screen flex items-start sm:items-center justify-center pt-6 pb-8 sm:py-12 md:py-16 lg:py-20 xl:py-0">
+      <div className="relative z-20 w-full min-h-0 sm:min-h-screen flex items-center justify-center pt-6 pb-8 sm:py-12 md:py-16 lg:py-20 xl:py-0">
         <div className="container relative z-20 pt-0 sm:pt-12 md:pt-16 lg:pt-0 px-4 sm:px-6 md:px-8 lg:px-4">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center max-w-7xl mx-auto">
             <motion.div 
-              className="flex flex-col space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 relative z-30"
+              className="flex flex-col items-center justify-center sm:items-start sm:justify-start space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 relative z-30"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
@@ -119,17 +119,17 @@ const HeroSection = memo(() => {
               >
                 <button 
                   onClick={handleLaunchSequence}
-                  className="group relative px-5 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-3.5 md:py-4 lg:py-5 bg-foreground text-background font-black rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden transition-transform hover:scale-[1.02] active:scale-95 shadow-[0_0_40px_rgba(0,0,0,0.2)] dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] cursor-pointer w-full sm:w-auto"
+                  className="group relative px-5 sm:px-6 md:px-6 lg:px-10 py-3 sm:py-3.5 md:py-3.5 lg:py-5 bg-foreground text-background font-black rounded-lg sm:rounded-xl md:rounded-xl lg:rounded-2xl overflow-hidden transition-transform hover:scale-[1.02] active:scale-95 shadow-[0_0_40px_rgba(0,0,0,0.2)] dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] cursor-pointer w-full sm:w-auto"
                 >
-                  <span className="relative flex items-center justify-center gap-2 uppercase tracking-wider text-[0.7rem] sm:text-[0.75rem] md:text-xs lg:text-sm font-semibold sm:font-bold">
-                    Launch Sequence <Zap size={14} className="sm:w-4 sm:h-4 md:w-[16px] md:h-[16px] lg:w-[18px] lg:h-[18px] flex-shrink-0" fill="currentColor" />
+                  <span className="relative flex items-center justify-center gap-2 uppercase tracking-wider text-[0.7rem] sm:text-[0.75rem] md:text-[0.75rem] lg:text-sm font-semibold sm:font-bold">
+                    Launch Sequence <Zap size={14} className="sm:w-4 sm:h-4 md:w-4 lg:w-[18px] lg:h-[18px] flex-shrink-0" fill="currentColor" />
                   </span>
                 </button>
                 <button 
                   onClick={() => setShowVideo(true)}
-                  className="group px-5 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-3.5 md:py-4 lg:py-5 bg-muted/50 dark:bg-white/5 border border-border dark:border-white/10 text-foreground font-bold rounded-lg sm:rounded-xl md:rounded-2xl hover:bg-muted dark:hover:bg-white/10 transition-all flex items-center justify-center gap-2 uppercase tracking-wider text-[0.7rem] sm:text-[0.75rem] md:text-xs lg:text-sm backdrop-blur-sm cursor-pointer w-full sm:w-auto"
+                  className="group px-5 sm:px-6 md:px-6 lg:px-10 py-3 sm:py-3.5 md:py-3.5 lg:py-5 bg-muted/50 dark:bg-white/5 border border-border dark:border-white/10 text-foreground font-bold rounded-lg sm:rounded-xl md:rounded-xl lg:rounded-2xl hover:bg-muted dark:hover:bg-white/10 transition-all flex items-center justify-center gap-2 uppercase tracking-wider text-[0.7rem] sm:text-[0.75rem] md:text-[0.75rem] lg:text-sm backdrop-blur-sm cursor-pointer w-full sm:w-auto"
                 >
-                  Watch System Intro <Play size={14} className="sm:w-4 sm:h-4 md:w-[16px] md:h-[16px] lg:w-[18px] lg:h-[18px] flex-shrink-0" fill="currentColor" />
+                  Watch System Intro <Play size={14} className="sm:w-4 sm:h-4 md:w-4 lg:w-[18px] lg:h-[18px] flex-shrink-0" fill="currentColor" />
                 </button>
               </motion.div>
 
